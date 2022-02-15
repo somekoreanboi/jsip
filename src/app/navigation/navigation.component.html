@@ -1,5 +1,4 @@
-<!-- works in Angular 12 + Angular Material 12 as of May 16, 2021 -->
-<mat-toolbar color="primary">
+<mat-toolbar fxLayout="row" color="primary">
   <mat-toolbar-row #toolbarRow>
     <a mat-button [routerLink]="['/']">JSIP</a>
     <!-- NOTE: use of $implicit below causes loop variable link to have a type of CustomLink -->
@@ -15,3 +14,4 @@
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
+

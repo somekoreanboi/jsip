@@ -16,10 +16,13 @@ import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PictureGridComponent } from './picture-grid/picture-grid.component';
 import { CompanyCardComponent } from './components/company-card/company-card.component';
-
+//Angular material
 import { MatCardModule} from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CompanyDetailsComponent } from './components/company-details/company-details.component';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
     ContactComponent,
     PageNotFoundComponent,
     PictureGridComponent,
-    CompanyCardComponent
+    CompanyCardComponent,
+    CompanyDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import { MatButtonModule } from '@angular/material/button';
     AppRoutingModule,
     MatCardModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    
   ],
   providers: [
     {
