@@ -32,8 +32,6 @@ speed-measure-plugin*.json
 .history/*
 # Visual Studio 2017
 .vs/
-# "C:\projects\angular-material-nav\.vs\slnx.sqlite"
-# "C:\projects\angular-material-nav\.vs\slnx.sqlite-journal"
 
 # misc
 /.angular/cache

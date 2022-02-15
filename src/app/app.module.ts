@@ -45,7 +45,9 @@ import { MatButtonModule } from '@angular/material/button';
   providers: [
     {
       provide: APP_BASE_HREF,
-      useValue: '/angular-material-nav'
+      // useValue: '/angular-material-nav',
+      useValue: '',
+
     }
   ],
   bootstrap: [AppComponent]
