@@ -21,7 +21,12 @@ import { MatCardModule} from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
 import { CompanyDetailsComponent } from './components/company-details/company-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 
 
 @NgModule({
@@ -34,7 +39,8 @@ import { CompanyDetailsComponent } from './components/company-details/company-de
     PageNotFoundComponent,
     PictureGridComponent,
     CompanyCardComponent,
-    CompanyDetailsComponent
+    CompanyDetailsComponent,
+    JumbotronComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +52,9 @@ import { CompanyDetailsComponent } from './components/company-details/company-de
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,
+    NgbModule,
+    MatGridListModule,
+    
     
   ],
   providers: [
