@@ -1,5 +1,5 @@
 <div class="content">
-  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+  <div fxLayout="row wrap" fxLayoutGap="30px grid">
     <div class = card-container [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let company of companies">
        <app-company-card [company]="company"></app-company-card>
     </div>
