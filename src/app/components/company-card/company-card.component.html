@@ -1,14 +1,15 @@
-<mat-card class="mat-elevation-z4">
-    <mat-card-header>
+<mat-card class="mat-elevation-z4" style="font-family: 'Baskervville', serif;">
+    <img mat-card-image style="height: 100px; width: 70%; display: block; margin-top: 10px; margin-left: auto; margin-right: auto;" src={{company.img}}>
+    <div style="text-align:center;">
       <mat-card-title style="font-size: 200%; font-weight: bold;">{{company.name}}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image style="height: 100px; width: fit-content; display: block; margin-left: auto; margin-right: auto;" src={{company.img}}>
+  </div>
+  <br>
     <mat-card-content>
       <p>
         {{company.description}}
       </p>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-flat-button color="primary" (click)="openCompanyDetails()">Check Opportunities</button>
-    </mat-card-actions>
+    <div style="text-align: center;">
+      <button mat-button (click)="openCompanyDetails()" style="color: red; text-decoration: underline; font-family: 'Baskervville', serif;">Check Opportunities</button>
+    </div>
   </mat-card>
