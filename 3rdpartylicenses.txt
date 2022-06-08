@@ -97,6 +97,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
+@ngneat/hot-toast
+MIT
+
+@ngneat/overview
+MIT
+
 @popperjs/core
 MIT
 The MIT License (MIT)
