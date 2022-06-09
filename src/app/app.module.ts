@@ -27,6 +27,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { CompanyDetailsComponent } from './components/company-details/company-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
+// import { LoginPageComponent } from './login-page/login-page/login-page.component';
+import { HotToastModule } from '@ngneat/hot-toast';
+import { AuthService } from 'ngx-auth/auth.service';
 
 
 @NgModule({
@@ -41,6 +44,7 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
     CompanyCardComponent,
     CompanyDetailsComponent,
     JumbotronComponent,
+    // LoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,7 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
     MatDialogModule,
     NgbModule,
     MatGridListModule,
+    HotToastModule.forRoot(),
     
     
   ],
@@ -62,6 +67,7 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
       provide: APP_BASE_HREF,
       // useValue: '/jsip',
       useValue: '',
+      // AuthService,
 
     }
   ],

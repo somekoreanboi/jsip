@@ -18,6 +18,10 @@ export class CompanyCardComponent implements OnInit {
     instance.company = this.company;
   }
 
+  goToLink(){
+    window.open(this.company.company_link, "_blank");
+}
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
