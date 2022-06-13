@@ -27,12 +27,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { CompanyDetailsComponent } from './components/company-details/company-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
-// import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { AuthService } from 'ngx-auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LoginPageComponent } from './login-page/login-page/login-page.component';
 
 
 @NgModule({
@@ -47,7 +47,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CompanyCardComponent,
     CompanyDetailsComponent,
     JumbotronComponent,
-    // LoginPageComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,

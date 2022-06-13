@@ -48,7 +48,7 @@ export class PictureGridComponent implements OnInit {
   
 ]
 
-gridColumns = 4;
+gridColumns = 5;
 
 toggleGridColumns() {
   this.gridColumns = this.gridColumns === 3 ? 4 : 3;

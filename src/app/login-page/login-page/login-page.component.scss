@@ -1,0 +1,39 @@
+.form-container {
+    display: block;
+    max-width: 50vw;
+    height: 30vh;
+    margin-left: 11%;
+    margin-top: 5%;
+
+    background: #eceff1;
+    padding: 48px;
+    padding-bottom: 350px;
+    border-radius: 16px;
+}
+
+.form-container mat-form-field {
+    width: 100%;
+    font-size: 200%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.margin-top {
+    margin-top: 16px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.sign-up-link {
+    font-size: 200%;
+    margin-left: 2%;
+}
+
+.welcome {
+    font-size: 130%;
+}
