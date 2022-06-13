@@ -31,4 +31,9 @@ export class NavigationComponent implements OnInit {
     }
     console.log(JSON.stringify(this.links));
   }
+
+  redirect() {
+    this.router.navigate(['/']);
+  }
+
 }
