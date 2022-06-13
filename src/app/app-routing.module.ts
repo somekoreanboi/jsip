@@ -13,8 +13,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { label: 'Home' } },
   { path: 'about', component: AboutComponent, data: { label: 'About Us' } },
   { path: 'companies', component: PictureGridComponent, data: { label: 'Internship Opportunities'}},
-    { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
-  { path: 'login', component: LoginPageComponent, data: { label: 'Login'}},
+  { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
+  { path: 'login', component: LoginPageComponent},
+  // { path: 'login', component: LoginPageComponent, data: { label: 'Login'}},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

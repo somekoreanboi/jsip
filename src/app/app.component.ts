@@ -1,4 +1,5 @@
 import { Component, VERSION as ngv } from '@angular/core';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,10 @@ import { Component, VERSION as ngv } from '@angular/core';
 export class AppComponent {
   title = 'app';
   angularVersion: string = ngv.full;
+
+
+  constructor() {
+
+  }
+
 }

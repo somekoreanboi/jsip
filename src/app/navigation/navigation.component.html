@@ -26,6 +26,7 @@
   <a [routerLink]="['/']">
     <img alt="HTML" src="assets/photos/jlink_logo.png" style="margin-left: 11%;">
   </a>
+  <strong *ngIf="user$ | async as user" class="welcome">Welcome to JSIP, {{user.email}}!</strong>
 </div>
 
 <mat-toolbar color=warn style="margin-left: 10%; width:80vw">
@@ -42,10 +43,21 @@
         {{ link.label }}</a
       >
     </ng-template>
-    <!-- <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/login']">
-        <mat-icon>login</mat-icon>
-      Login
-    </button> -->
+
+    <ng-container *ngIf="authService.currentUser$ | async as user; else loginButton">
+    <button class="menus" mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </ng-container>
+
+  <ng-template #loginButton>
+  <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/login']">
+    <mat-icon>login</mat-icon>
+  Login
+  </button>
+</ng-template>
+
   </div>
 
   <!-- Side menu bar toggle button for mobile -->

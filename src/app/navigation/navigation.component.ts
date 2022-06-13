@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Route } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 import { CustomLink } from './custom-link';
 
 @Component({
@@ -8,10 +9,13 @@ import { CustomLink } from './custom-link';
   styleUrls: ['./navigation.component.scss'],
 })
 export class NavigationComponent implements OnInit {
+
+  user$ = this.authService.currentUser$;
+
   background = 'primary';
   links: CustomLink[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public authService: AuthenticationService) {}
 
   ngOnInit(): void {
     // build the navigation links using the Angular route config that was defined in app-routing.module.ts
@@ -31,5 +35,13 @@ export class NavigationComponent implements OnInit {
     }
     console.log(JSON.stringify(this.links));
   }
+
+
+  logout() {
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['']);
+    });
+  }
+
 
 }

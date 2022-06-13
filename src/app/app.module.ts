@@ -28,11 +28,13 @@ import { CompanyDetailsComponent } from './components/company-details/company-de
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 import { HotToastModule } from '@ngneat/hot-toast';
-import { AuthService } from 'ngx-auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
 
 
 @NgModule({
@@ -65,6 +67,8 @@ import { LoginPageComponent } from './login-page/login-page/login-page.component
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
     
   ],
   providers: [
