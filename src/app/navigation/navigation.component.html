@@ -19,7 +19,14 @@
   </button> -->
 <!-- </mat-toolbar> -->
 
-<img alt="HTML" (click)="redirect()" src="assets/photos/jlink_logo.png" style="margin-left: 11%;">
+<!-- <img alt="HTML" (click)="redirect()" src="assets/photos/jlink_logo.png" style="margin-left: 11%;"> -->
+
+
+<div routerLinkActive="active">
+  <a [routerLink]="['/']">
+    <img alt="HTML" src="assets/photos/jlink_logo.png" style="margin-left: 11%;">
+  </a>
+</div>
 
 <mat-toolbar color=warn style="margin-left: 10%; width:80vw">
   <span class="fill-remaining-space"></span>
