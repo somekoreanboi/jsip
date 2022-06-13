@@ -30,6 +30,9 @@ import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 // import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { AuthService } from 'ngx-auth/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -59,7 +62,9 @@ import { AuthService } from 'ngx-auth/auth.service';
     NgbModule,
     MatGridListModule,
     HotToastModule.forRoot(),
-    
+    ReactiveFormsModule,
+    MatIconModule,
+    MatFormFieldModule,
     
   ],
   providers: [

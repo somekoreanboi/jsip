@@ -42,15 +42,23 @@
         {{ link.label }}</a
       >
     </ng-template>
+    <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/login']">
+        <mat-icon>login</mat-icon>
+      Login
+    </button>
   </div>
+
+  <!-- Side menu bar toggle button for mobile -->
   <button mat-button [mat-menu-trigger-for]="menu" fxShow fxHide.gt-sm style="margin-left:-5%;">
    <mat-icon>menu</mat-icon>
   </button>
-
 </mat-toolbar>
+
+<!-- Side menu bar for mobile -->
 <mat-menu x-position="before" #menu>
   <button mat-menu-item routerLink="/home">Home</button>
   <button mat-menu-item routerLink="/aboutus">About Us</button>
   <button mat-menu-item routerLink="/companies">Internship Opportunities</button>
   <button mat-menu-item routerLink="/contactus">Contact Us</button>
+  <button mat-menu-item routerLink="/login">Login</button>
 </mat-menu>
