@@ -7,6 +7,7 @@ import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PictureGridComponent } from './picture-grid/picture-grid.component';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
   { path: 'login', component: LoginPageComponent},
   // { path: 'login', component: LoginPageComponent, data: { label: 'Login'}},
+  { path: 'signup', component: SignUpComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

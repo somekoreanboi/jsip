@@ -35,6 +35,7 @@ import { LoginPageComponent } from './login-page/login-page/login-page.component
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     CompanyDetailsComponent,
     JumbotronComponent,
     LoginPageComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
