@@ -23,6 +23,12 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatGridListModule} from '@angular/material/grid-list';
 
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import {HttpClientModule} from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+
+
+
 
 import { CompanyDetailsComponent } from './components/company-details/company-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -71,6 +77,10 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatFormFieldModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    MatSelectCountryModule.forRoot('en'), // you can use 'br' | 'de' | 'en' | 'es' | 'fr' | 'hr' | 'it' | 'nl' | 'pt' --> MatSelectCountrySupportedLanguages
+    HttpClientModule,
+    MatSelectModule,
+    
     
   ],
   providers: [

@@ -47,6 +47,9 @@ import { PlatformModule } from '@angular/cdk/platform';
 import { CdkTableModule } from '@angular/cdk/table';
 import { ObserversModule } from '@angular/cdk/observers';
 
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import {HttpClientModule} from '@angular/common/http';
+
 const materialModules = [
   MatAutocompleteModule,
   MatBadgeModule,
@@ -84,6 +87,8 @@ const materialModules = [
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
+  MatSelectCountryModule, 
+  HttpClientModule,
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import {Country} from '@angular-material-extensions/select-country'; 
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -30,13 +31,50 @@ export class SignUpComponent implements OnInit {
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required]),
     password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', Validators.required)
+    confirmPassword: new FormControl('', Validators.required),
+    gender: new FormControl('', [Validators.required]),
+    dateOfBirth: new FormControl('', [Validators.required]),
+    nameOfUniversity: new FormControl('', [Validators.required]),
+    graduationPeriod: new FormControl('', [Validators.required]),
 
-  }, { validators: passwordsMatchValidator()})
 
-  constructor() { }
+
+  }, { validators: passwordsMatchValidator(), 
+  },)
+
+
+  countryFormControl = new FormControl();
+  countryFormGroup!: FormGroup;
+
+  selectedGender = 'male';
+
+  constructor(private formBuilder: FormBuilder) {
+   }
 
   ngOnInit(): void {
+    this.countryFormGroup = this.formBuilder.group({
+      country: [
+        {
+        name: 'Singapore',
+        alpha2Code: 'SG',
+        alpha3Code: 'SGP',
+        numericCode: '702'
+      }
+  ]
+    });
+
+    this.countryFormGroup?.get('country')?.valueChanges
+.subscribe(country => console
+.log('this.countryFormGroup.get("country").valueChanges', country));
+
+    this.countryFormControl.valueChanges
+.subscribe(country => console
+.log('this.countryFormControl.valueChanges', country));
+  }
+
+
+  onCountrySelected($event: Country) {
+    console.log($event);
   }
 
   get name() {
@@ -53,6 +91,10 @@ export class SignUpComponent implements OnInit {
 
   get confirmPassword() {
     return this.signUpForm.get('confirmPassword');
+  }
+
+  get gender() {
+    return this.signUpForm.get('gender');
   }
 
 }
