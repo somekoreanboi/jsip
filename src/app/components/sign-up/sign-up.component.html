@@ -34,15 +34,22 @@
           Confirm Password is required
         </mat-error>
       </mat-form-field>
+      
 
       <mat-select-country appearance="outline" 
       style="width: 300%;"
       label="Nationality"
       [formControl]="countryFormControl"
-      (onCountrySelected)="onCountrySelected($event)">
+      (onCountrySelected)="onCountrySelected($event)"
+      loadingDB="true"
+      [value]="defaultNationality"
+      >
     </mat-select-country>
+    <mat-error *ngIf="countryFormControl?.errors?.['required']">
+        Nationality is required.
+    </mat-error>
 
-    <mat-form-field>
+    <mat-form-field  style="padding-top: 5%;">
         <input matInput placeholder="Date of birth" formControlName="dateOfBirth" type=date/>
         <mat-error *ngIf="password?.errors?.['required']">
           Date of birth is required.
@@ -62,14 +69,14 @@
 
       <mat-form-field>
         <input matInput placeholder="Name of University" formControlName="nameOfUniversity"/>
-        <mat-error *ngIf="name?.errors?.['required']">
+        <mat-error *ngIf="nameOfUniversity?.errors?.['required']">
           Name of university is required
         </mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Graduation Period" formControlName="graduationPeriod" type="month"/>
-        <mat-error *ngIf="password?.errors?.['required']">
+        <mat-error *ngIf="graduationPeriod?.errors?.['required']">
            Graduation period is required.
         </mat-error>
       </mat-form-field>
@@ -83,78 +90,76 @@
           <mat-option value="4">Year 4</mat-option>
           <mat-option value="5">Year 5 or higher</mat-option>
         </mat-select>
-        <mat-error *ngIf="gender?.hasError('required')">You must make a selection</mat-error>
+        <mat-error *ngIf="yearOfStudy?.hasError('required')">Year of study is required</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Faculty/Major" formControlName="major"/>
-        <mat-error *ngIf="name?.errors?.['required']">
-          Faculty/Major is required
-        </mat-error>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field style="font-size: 2.5vh;">
         <input matInput placeholder="Japanese Proficiency (e.g. JLPT N1-5 etc.)" formControlName="japaneseProficiency"/>
-        <mat-error *ngIf="name?.errors?.['required']">
+        <mat-error *ngIf="japaneseProficiency?.errors?.['required']">
           Japanese Proficiency is required
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" style="font-size: 2vh;">
         <mat-label>Where would you like to work in the future?</mat-label>
-        <mat-select formControlName="yearOfStudy">
+        <mat-select formControlName="yearOfStudy" multiple>
           <mat-option value="japan">Japan</mat-option>
           <mat-option value="america">America</mat-option>
           <mat-option value="singapore">Singapore</mat-option>
-          <mat-option value="etc">ETC.</mat-option>
+          <mat-option value="etc">etc.</mat-option>
         </mat-select>
-        <mat-error *ngIf="gender?.hasError('required')">You must make a selection</mat-error>
+        <mat-error *ngIf="futureWorkplace?.hasError('required')">Future workplace is required.</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>What are you looking for?</mat-label>
-        <mat-select formControlName="jobType">
+        <mat-select formControlName="jobType" multiple>
             <mat-option value="internship">Internship</mat-option>
             <mat-option value="jobOffer">Job Offer</mat-option>        
         </mat-select>
+        <mat-error *ngIf="jobType?.hasError('required')">Job type is required</mat-error>
       </mat-form-field>
 
-      <section class="checkbox" [formGroup]="industryField">
-        <h4>Industries you are interested in (you may choose more than one option)</h4>
-        <p><mat-checkbox formControlName="consulting">Consulting</mat-checkbox></p>
-        <p><mat-checkbox formControlName="manufacturingCompany">Manufacuring Company</mat-checkbox></p>
-        <p><mat-checkbox formControlName="IT">IT</mat-checkbox></p>
-        <p><mat-checkbox formControlName="foodIndustry">Food Industry</mat-checkbox></p>
-        <p><mat-checkbox formControlName="media">Media</mat-checkbox></p>
-        <p><mat-checkbox formControlName="banking">Banking/Financial Industry</mat-checkbox></p>
-        <p><mat-checkbox formControlName="realEstate">Real Estate</mat-checkbox></p>
-        <p><mat-checkbox formControlName="employmentAgency">Employment Agency</mat-checkbox></p>
-        <p><mat-checkbox formControlName="advertisingAgency">Advertising Agency</mat-checkbox></p>
-        <p><mat-checkbox formControlName="npo">NPO/NGO</mat-checkbox></p>
-        <p><mat-checkbox formControlName="etc">ETC.</mat-checkbox></p>
-      </section>
+      <mat-form-field appearance="fill">
+        <mat-label>Industries you are interested in (Multiple choice)</mat-label>
+        <mat-select formControlName="industryField" multiple>
+            <mat-option value="consulting">Consulting</mat-option>
+            <mat-option value="manufacturingCompany">Manufacturing Company</mat-option>        
+            <mat-option value="IT">IT</mat-option>        
+            <mat-option value="foodIndustry">Food Industry</mat-option>        
+            <mat-option value="media">Media</mat-option>        
+            <mat-option value="banking">Banking/Financial Industry</mat-option>        
+            <mat-option value="realEstate">Real Estate</mat-option>        
+            <mat-option value="employmentAgency">Employment Agency</mat-option>        
+            <mat-option value="advertisingAgency">Advertising Agency</mat-option>        
+            <mat-option value="npo">NPO/NGO</mat-option>        
+            <mat-option value="etc">etc.</mat-option>        
+        </mat-select>
+        <mat-error *ngIf="industryField?.hasError('required')">Please choose at least one</mat-error>
+      </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field  style="font-size: 2vh;">
         <input matInput placeholder="Why are you looking for job opportunity at
-         a Japanese company?" formControlName="name">
-        <mat-error *ngIf="name?.errors?.['required']">
-          Name is required
+         a Japanese company?" formControlName="reason">
+        <mat-error *ngIf="reason?.errors?.['required']">
+          Reason is required
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field style="font-size: 1.5vh;">
         <input matInput placeholder="What do you expect from working at a Japanese 
-         company?" formControlName="name">
-        <mat-error *ngIf="name?.errors?.['required']">
-          Name is required
+         company?" formControlName="expectation">
+        <mat-error *ngIf="expectation?.errors?.['required']">
+          Expectation is required
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="What makes you stand out? (Skills, Certificate, Experience etc)" formControlName="name"/>
-        <mat-error *ngIf="name?.errors?.['required']">
-          Name is required
-        </mat-error>
+      <mat-form-field style="font-size: 1.5vh;">
+        <input matInput placeholder="What makes you stand out? (Skills, Certificate, Experience etc)" formControlName="standOut"/>
       </mat-form-field>
 
       <div class="center margin-top">
