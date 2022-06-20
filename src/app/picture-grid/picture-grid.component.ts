@@ -11,7 +11,7 @@ export class PictureGridComponent implements OnInit {
 
   companies: Company[] = [
     {
-    name: 'M&S Parteners',
+    name: 'M&S Partners',
     description: "We are a Singaporean company that invests, incubates and accelerates startups, primarily in the Web 3.0 space, founded in 2022 by a founding team experienced in venture investing that has discovered multiple decacorn and unicorn companies.",
     subname: 'this is subname',
     img: "http://international.adtech-tokyo.com/wp-content/uploads/2016/07/Hiro-Mashita_logo.jpg", 

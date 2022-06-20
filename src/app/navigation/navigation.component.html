@@ -77,5 +77,11 @@
   <button mat-menu-item routerLink="/aboutus">About Us</button>
   <button mat-menu-item routerLink="/companies">Internship Opportunities</button>
   <button mat-menu-item routerLink="/contactus">Contact Us</button>
+  <ng-container *ngIf="authService.currentUser$ | async as user; else sideLoginButton">
+    <button mat-menu-item  (click)="logout()">Logout</button>
+  </ng-container>
+  <ng-template #sideLoginButton>
   <button mat-menu-item routerLink="/login">Login</button>
+  <button mat-menu-item routerLink="/signup">Sign up</button>
+</ng-template>
 </mat-menu>
