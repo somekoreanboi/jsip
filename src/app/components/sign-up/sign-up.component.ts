@@ -36,12 +36,31 @@ export class SignUpComponent implements OnInit {
     dateOfBirth: new FormControl('', [Validators.required]),
     nameOfUniversity: new FormControl('', [Validators.required]),
     graduationPeriod: new FormControl('', [Validators.required]),
+    yearOfStudy: new FormControl('', [Validators.required]),
+    japaneseProficiency: new FormControl('', [Validators.required]),
+    major: new FormControl('', [Validators.required]),
+    jobType: new FormControl('', [Validators.required]),
+
 
 
 
   }, { validators: passwordsMatchValidator(), 
   },)
 
+
+  industryField = this.formBuilder.group({
+    consulting: false,
+    manufacturingCompany: false,
+    IT: false,
+    foodIndustry: false,
+    media: false,
+    banking: false,
+    realEstate: false,
+    employmentAgency: false,
+    advertisingAgency: false,
+    npo: false,
+    etc: false,
+  });
 
   countryFormControl = new FormControl();
   countryFormGroup!: FormGroup;

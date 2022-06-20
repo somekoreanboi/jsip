@@ -56,9 +56,14 @@
     <mat-icon>login</mat-icon>
   Login
   </button>
+
+  <a class="menus" mat-button routerLinkActive="active" [routerLink]="['/signup']">
+    Sign Up
+  </a>
+
 </ng-template>
 
-  </div>
+</div>
 
   <!-- Side menu bar toggle button for mobile -->
   <button mat-button [mat-menu-trigger-for]="menu" fxShow fxHide.gt-sm style="margin-left:-5%;">
