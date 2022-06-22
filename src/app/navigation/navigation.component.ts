@@ -11,7 +11,7 @@ import { CustomLink } from './custom-link';
 export class NavigationComponent implements OnInit {
 
   user$ = this.authService.currentUser$;
-
+  
   background = 'primary';
   links: CustomLink[] = [];
 
