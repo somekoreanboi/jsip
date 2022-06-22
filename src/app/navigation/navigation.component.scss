@@ -1,25 +1,36 @@
 .active-route {
-  color: rgb(0, 0, 0);
-  font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
 }
 
 .menus {
-  text-decoration: underline;
-  font-size: 150%;
+    font-size: 120%;
 }
 
-
 img {
-  width: 20vmin;
-  height: auto;
+    width: 20vmin;
+    height: auto;
 }
 
 img:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .welcome {
-  margin-bottom: 15%;
-  margin-left: 5%;
-  font-size: 200%;
+    margin-bottom: 15%;
+    margin-left: 5%;
+    font-size: 200%;
+}
+
+.mat-button {
+    margin: 0 5px
+}
+
+.mat-button:hover {
+    color: black;
+}
+
+.mat-button-toggle-checked {
+    background-color: white;
+    text-decoration: underline;
 }

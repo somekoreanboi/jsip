@@ -1,8 +1,8 @@
 <!-- <mat-toolbar fxLayout="row" color=warn style="margin-left: 10%; margin-top: 10%;">
   <mat-toolbar-row #toolbarRow>
     <a mat-button [routerLink]="['/']">JSIP</a> -->
-    <!-- NOTE: use of $implicit below causes loop variable link to have a type of CustomLink -->
-    <!-- <ng-template ngFor let-link="$implicit" [ngForOf]="links">
+<!-- NOTE: use of $implicit below causes loop variable link to have a type of CustomLink -->
+<!-- <ng-template ngFor let-link="$implicit" [ngForOf]="links">
       <a
         mat-button
         [routerLink]="link.path"
@@ -13,7 +13,7 @@
       >
     </ng-template>
   </mat-toolbar-row> -->
-  <!-- <button mat-button routerLink="login">
+<!-- <button mat-button routerLink="login">
     <mat-icon>login</mat-icon>
     Login
   </button> -->
@@ -21,25 +21,20 @@
 
 <!-- <img alt="HTML" (click)="redirect()" src="assets/photos/jlink_logo.png" style="margin-left: 11%;"> -->
 
+<div style="height: 15vh">
+    <div routerLinkActive="active" style="width: fit-content; margin: 0; float:left">
+        <a [routerLink]="['/']">
+            <img alt="HTML" src="assets/photos/jlink_logo.png" style="margin-left: 20%; width: 30%;">
+        </a>
+        <strong *ngIf="user$ | async as user" class="welcome">Welcome to JSIP, {{user.email}}!</strong>
+    </div>
 
-<div routerLinkActive="active">
-  <a [routerLink]="['/']">
-    <img alt="HTML" src="assets/photos/jlink_logo.png" style="margin-left: 11%;">
-  </a>
-  <strong *ngIf="user$ | async as user" class="welcome">Welcome to JSIP, {{user.email}}!</strong>
-</div>
+    <mat-toolbar style="background-color: white; width: fit-content; float:right; margin-top: 2%;">
+        <span class="fill-remaining-space"></span>
 
-<mat-toolbar color=warn style="margin-left: 10%; width:80vw">
-  <span class="fill-remaining-space"></span>
-
-  <div fxLayout="row" fxHide fxShow.gt-sm>
-    <ng-template ngFor let-link="$implicit" [ngForOf]="links">
-      <a class="menus"
-        mat-button
-        [routerLink]="link.path"
-        [routerLinkActive]="['mat-button-toggle-checked', 'active-route']"
-        #rla="routerLinkActive"
-      >
+        <div fxLayout="row" fxHide fxShow.gt-sm>
+            <ng-template ngFor let-link="$implicit" [ngForOf]="links">
+                <a class="menus" mat-button [routerLink]="link.path" [routerLinkActive]="['mat-button-toggle-checked', 'active-route']" #rla="routerLinkActive">
         {{ link.label }}</a
       >
     </ng-template>
@@ -61,27 +56,28 @@
     Sign Up
   </a>
 
-</ng-template>
+            </ng-template>
 
-</div>
+        </div>
 
-  <!-- Side menu bar toggle button for mobile -->
-  <button mat-button [mat-menu-trigger-for]="menu" fxShow fxHide.gt-sm style="margin-left:-5%;">
+        <!-- Side menu bar toggle button for mobile -->
+        <button mat-button [mat-menu-trigger-for]="menu" fxShow fxHide.gt-sm style="margin-left:-5%;">
    <mat-icon>menu</mat-icon>
   </button>
-</mat-toolbar>
+    </mat-toolbar>
 
-<!-- Side menu bar for mobile -->
-<mat-menu x-position="before" #menu>
-  <button mat-menu-item routerLink="/home">Home</button>
-  <button mat-menu-item routerLink="/aboutus">About Us</button>
-  <button mat-menu-item routerLink="/companies">Internship Opportunities</button>
-  <button mat-menu-item routerLink="/contactus">Contact Us</button>
-  <ng-container *ngIf="authService.currentUser$ | async as user; else sideLoginButton">
-    <button mat-menu-item  (click)="logout()">Logout</button>
-  </ng-container>
-  <ng-template #sideLoginButton>
-  <button mat-menu-item routerLink="/login">Login</button>
-  <button mat-menu-item routerLink="/signup">Sign up</button>
-</ng-template>
-</mat-menu>
+    <!-- Side menu bar for mobile -->
+    <mat-menu x-position="before" #menu>
+        <button mat-menu-item routerLink="/home">Home</button>
+        <button mat-menu-item routerLink="/aboutus">About Us</button>
+        <button mat-menu-item routerLink="/companies">Internship Opportunities</button>
+        <button mat-menu-item routerLink="/contactus">Contact Us</button>
+        <ng-container *ngIf="authService.currentUser$ | async as user; else sideLoginButton">
+            <button mat-menu-item (click)="logout()">Logout</button>
+        </ng-container>
+        <ng-template #sideLoginButton>
+            <button mat-menu-item routerLink="/login">Login</button>
+            <button mat-menu-item routerLink="/signup">Sign up</button>
+        </ng-template>
+    </mat-menu>
+</div>

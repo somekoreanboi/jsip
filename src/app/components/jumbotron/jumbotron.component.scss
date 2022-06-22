@@ -1,11 +1,25 @@
 .jumbotron {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 80vh;
     width: 100vw;
+    position: relative;
 }
 
 .flex_item {
-    flex: 1 1; /* flex: 1 1 0 */
-    overflow: auto;
-  }
+    flex: 1 1;
+    /* flex: 1 1 0 */
+    overflow: hidden;
+    z-index: 9999;
+    position: absolute;
+    top: 25%;
+    left: 10%;
+}
+
+img {
+    position: absolute;
+    top: 10%;
+    left: 30%;
+    width: 50%;
+    opacity: 50%;
+}
