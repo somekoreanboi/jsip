@@ -38,14 +38,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireModule, FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AuthenticationService } from './services/authentication.service';
 
 
 
@@ -81,8 +81,8 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
     MatSelectCountryModule.forRoot('en'), // you can use 'br' | 'de' | 'en' | 'es' | 'fr' | 'hr' | 'it' | 'nl' | 'pt' --> MatSelectCountrySupportedLanguages
     HttpClientModule,
     MatSelectModule,
@@ -93,13 +93,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     
   ],
   providers: [
-    {
-      provide: APP_BASE_HREF,
-      // useValue: '/jsip',
-      useValue: '',
-      // AuthService,
-
-    }
+    AuthenticationService,
   ],
   bootstrap: [AppComponent]
 })

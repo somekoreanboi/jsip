@@ -33,22 +33,15 @@ export class LoginPageComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
+  
+
   submit() {
+    const {email, password} = this.loginForm.value;
     if (!this.loginForm.valid) {
-      return;
+      this.authService.login(email, password);
     }
 
-    const {email, password} = this.loginForm.value;
     
-    this.authService.login(email, password).pipe(
-      this.toast.observe({
-        success: 'Logged in successfully',
-        loading: 'Logging in...',
-        error: 'Oops! There was an error'
-      })
-    ).subscribe(() => {
-      this.router.navigate(['/home']);
-    });
 
   }
 
