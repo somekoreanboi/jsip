@@ -41,7 +41,13 @@ import { LoginPageComponent } from './login-page/login-page/login-page.component
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
+
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+
+
 
 
 @NgModule({
@@ -80,6 +86,9 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
     MatSelectCountryModule.forRoot('en'), // you can use 'br' | 'de' | 'en' | 'es' | 'fr' | 'hr' | 'it' | 'nl' | 'pt' --> MatSelectCountrySupportedLanguages
     HttpClientModule,
     MatSelectModule,
+    AngularFireAnalyticsModule,
+    AngularFirestoreModule,
+    
     
     
   ],

@@ -18,7 +18,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "aot": false,
-            "assets": ["src/favicon.ico", 
+            "assets": [
+              "src/favicon.ico",
               "src/assets",
               {
                 "glob": "**/*",
@@ -104,18 +105,30 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.png", "src/assets",
+            "assets": [
+              "src/favicon.png",
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "./node_modules/svg-country-flags/svg",
                 "output": "/assets/svg-country-flags/svg"
-              }],
-            "styles": ["src/styles.scss"],
+              }
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "jsip:build:production",
+            "firebaseProject": "jsip-f6fc5",
+            "firebaseHostingSite": "jsip-f6fc5"
+          }
         }
       }
     },

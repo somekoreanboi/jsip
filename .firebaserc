@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "jsip-f6fc5"
+  },
+  "targets": {
+    "jsip-f6fc5": {
+      "hosting": {
+        "jsip": [
+          "jsip-f6fc5"
+        ]
+      }
+    }
   }
 }
