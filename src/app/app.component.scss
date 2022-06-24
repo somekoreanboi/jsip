@@ -1,8 +1,26 @@
 $mycolor: rgb(255, 104, 0);
 body {
-  background-color: $mycolor;
+    background-color: $mycolor;
 }
 
 .someCustomStyle {
-  background-color: $mycolor;
+    background-color: $mycolor;
+}
+
+.mat-typography {
+    height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.mat-typography:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 600px solid transparent;
+    // border-bottom: 20px solid blue;
+    border-right: 80vw solid rgba(255, 192, 203, 0.3);
+    border-left: 20vw solid rgb(255, 57, 57);
+    z-index: -1;
 }
