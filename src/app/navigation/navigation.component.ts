@@ -10,8 +10,6 @@ import { CustomLink } from './custom-link';
 })
 export class NavigationComponent implements OnInit {
 
-  user$ = this.authService.currentUser$;
-  
   background = 'primary';
   links: CustomLink[] = [];
 
@@ -38,7 +36,7 @@ export class NavigationComponent implements OnInit {
 
 
   logout() {
-    this.authService.logout();
+    this.authService.SignOut();
   }
 
 

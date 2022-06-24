@@ -18,7 +18,7 @@ export class LoginPageComponent implements OnInit {
   })
 
 
-  constructor(private authService: AuthenticationService, private toast: HotToastService, private router: Router) { }
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -36,9 +36,14 @@ export class LoginPageComponent implements OnInit {
   
 
   submit() {
+
+
     const {email, password} = this.loginForm.value;
-    if (!this.loginForm.valid) {
-      this.authService.login(email, password);
+    console.log(email, password);
+    if (this.loginForm.valid) {
+      this.authService.SignIn(email, password);
+    } else {
+      console.log('error');
     }
 
     

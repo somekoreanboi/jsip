@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PictureGridComponent } from './picture-grid/picture-grid.component';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { AuthenticationService } from './services/authentication.service';
 
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routeOptions: ExtraOptions = {
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, routeOptions)],
-  exports: [RouterModule]
-})
+  exports: [RouterModule],
+  providers: [
+    AuthenticationService,
+  ],
+},
+)
 export class AppRoutingModule {}
