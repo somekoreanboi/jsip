@@ -48,10 +48,7 @@ export class SignUpComponent implements OnInit {
     expectation: new FormControl('', [Validators.required]),
     futureWorkplace: new FormControl('', [Validators.required]),
     industryField: new FormControl('', [Validators.required]),
-
-
-
-
+    nationality: new FormControl('', [Validators.required]),
 
 
 
@@ -59,8 +56,6 @@ export class SignUpComponent implements OnInit {
   },)
 
 
-  countryFormControl = new FormControl('', [Validators.required])
-  countryFormGroup!: FormGroup;
 
   selectedGender = 'male';
 
@@ -76,24 +71,7 @@ export class SignUpComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.countryFormGroup = this.formBuilder.group({
-      country: [
-        {
-        name: 'Singapore',
-        alpha2Code: 'SG',
-        alpha3Code: 'SGP',
-        numericCode: '702'
-      }
-  ]
-    });
 
-    this.countryFormGroup?.get('country')?.valueChanges
-.subscribe(country => console
-.log('this.countryFormGroup.get("country").valueChanges', country));
-
-    this.countryFormControl.valueChanges
-.subscribe(country => console
-.log('this.countryFormControl.valueChanges', country));
   }
 
 
@@ -169,21 +147,42 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.get('industryField');
   }
 
-  public sendNotificationMail(e: Event) {
-    emailjs.sendForm('service_14f2b2e', 'template_faqxazn', e.target as HTMLFormElement, 'WGH4g3DXxavORwVuf')
-      .then((result: EmailJSResponseStatus) => {
-        console.log(result.text);
-      }, (error) => {
-        console.log(error.text);
-      });
+  get nationality() {
+    return this.signUpForm.get('nationality');
   }
 
-  signup(e: Event) {
+  public sendNotificationMail(userProfile: UserProfile) {
+      emailjs.send("service_14f2b2e","template_faqxazn",{
+        name: userProfile.name,
+        email: userProfile.email,
+        nationality: userProfile.nationality,
+        birthday: userProfile.birthday,
+        gender: userProfile.gender,
+        universityName: userProfile.universityName,
+        graduationPeriod: userProfile.graduationPeriod,
+        yearOfStudy: userProfile.yearOfStudy,
+        faculty: userProfile.faculty,
+        japaneseProficiency: userProfile.japaneseProficiency,
+        futureWorkPlace: userProfile.futureWorkPlace,
+        jobType: userProfile.jobType,
+        interestedIndustry: userProfile.interestedIndustry,
+        reason: userProfile.reason,
+        expectation: userProfile.expectation,
+        standOut: userProfile.standOut,
+        },
+        'WGH4g3DXxavORwVuf'
+        );
+      // emailjs.sendForm("service_14f2b2e","template_faqxazn", this.signUpForm);
+  }
+
+  
+
+  signup() {
     const userData: UserProfile = {
       name: this.name?.value,
       email: this.email?.value,
       password: this.password?.value,
-      nationality: this.countryFormControl.value.name,
+      nationality: this.nationality?.value.name,
       birthday: this.dateOfBirth?.value,
       gender: this.gender?.value,
       universityName: this.nameOfUniversity?.value,
@@ -192,6 +191,7 @@ export class SignUpComponent implements OnInit {
       faculty: this.major?.value,
       japaneseProficiency: this.japaneseProficiency?.value,
       futureWorkPlace: this.futureWorkplace?.value.toString(),
+      jobType: this.jobType?.value.toString(),
       interestedIndustry: this.industryField?.value.toString(),
       reason: this.reason?.value,
       expectation: this.expectation?.value,
@@ -200,7 +200,7 @@ export class SignUpComponent implements OnInit {
 
     if (this.signUpForm.valid) {
       this.authService.SignUp(userData)
-      this.sendNotificationMail(e);
+      this.sendNotificationMail(userData);
     } else {
       window.alert("Invalid form!");
     }

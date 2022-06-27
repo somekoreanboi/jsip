@@ -11,6 +11,7 @@ export interface UserProfile {
     faculty?: string;
     japaneseProficiency?: string;
     futureWorkPlace?: string;
+    jobType?: string;
     interestedIndustry?: string;
     reason?: string;
     expectation?: string;
