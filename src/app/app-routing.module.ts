@@ -9,6 +9,7 @@ import { PictureGridComponent } from './picture-grid/picture-grid.component';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthenticationService } from './services/authentication.service';
+import { SecureInnerPagesGuard } from './guard/secure-inner-pages.guard';
 
 
 const routes: Routes = [
@@ -16,9 +17,9 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent, data: { label: 'About Us' } },
   { path: 'companies', component: PictureGridComponent, data: { label: 'Internship Opportunities'}},
   { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
-  { path: 'login', component: LoginPageComponent},
+  { path: 'login', component: LoginPageComponent, canActivate: [SecureInnerPagesGuard],},
   // { path: 'login', component: LoginPageComponent, data: { label: 'Login'}},
-  { path: 'signup', component: SignUpComponent},
+  { path: 'signup', component: SignUpComponent, canActivate: [SecureInnerPagesGuard],},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
