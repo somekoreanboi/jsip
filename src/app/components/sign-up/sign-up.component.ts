@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Country} from '@angular-material-extensions/select-country'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { UserProfile } from 'src/app/models/user-profile';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -69,7 +71,7 @@ export class SignUpComponent implements OnInit {
     callingCode: '+65'
   };
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,) {
    }
 
   ngOnInit(): void {
@@ -164,6 +166,35 @@ export class SignUpComponent implements OnInit {
 
   get industryField() {
     return this.signUpForm.get('industryField');
+  }
+
+  signup() {
+    const userData: UserProfile = {
+      name: this.name?.value,
+      email: this.email?.value,
+      password: this.password?.value,
+      nationality: this.countryFormControl.value.name,
+      birthday: this.dateOfBirth?.value,
+      gender: this.gender?.value,
+      universityName: this.nameOfUniversity?.value,
+      graduationPeriod: this.graduationPeriod?.value,
+      yearOfStudy: this.yearOfStudy?.value,
+      faculty: this.major?.value,
+      japaneseProficiency: this.japaneseProficiency?.value,
+      futureWorkPlace: this.futureWorkplace?.value.toString(),
+      interestedIndustry: this.industryField?.value.toString(),
+      reason: this.reason?.value,
+      expectation: this.expectation?.value,
+      standOut: this.standOut?.value,
+    };
+
+    if (this.signUpForm.valid) {
+      this.authService.SignUp(userData)
+    } else {
+      window.alert("Invalid form!");
+    }
+
+    console.log(JSON.stringify(userData))
   }
 
 }

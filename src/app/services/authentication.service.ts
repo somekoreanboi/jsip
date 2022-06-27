@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
 import { UserProfile } from '../models/user-profile';
-import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
@@ -35,31 +34,64 @@ export class AuthenticationService {
   }
 
   // Sign in with email/password
-  SignIn(email: string, password: string) {
-    console.log(email, password);
+  SignIn(email:string, password:string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
         });
-        this.SetUserData(result.user);
-        console.log("userDataAAAAA" + this.userData);
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+          `users/${email}`
+        );
+        // const userProfile: UserProfile = {
+        //   name = userRef.get(),
+        //   email: string,
+        //   password: string,
+        //   nationality: string,
+        //   birthday: string,
+        //   gender: string,
+        //   universityName: string,
+        //   graduationPeriod: string,
+        //   yearOfStudy: string,
+        //   faculty: string,
+        //   japaneseProficiency: string,
+        //   futureWorkPlace: string,
+        //   interestedIndustry: string,
+        //   reason: string,
+        //   expectation: string,
+        //   standOut: string,
+        // }
+        // this.SetUserData(userProfile);
+        console.log("testasdfasfdasdfasdftestsdfsdf");
+        userRef.
+        ref
+        .get()
+        .then((doc) => {
+            if (doc.exists) {
+                const userProfile: UserProfile = doc.data();
+                this.SetUserData(userProfile);
+            } else {
+                window.alert("Error while loading user data!")
+            }
+         })
+
       })
       .catch((error) => {
         window.alert(error.message);
       });
   }
 
-  // Sign up with email/password
-  SignUp(email: string, password: string) {
+  // Sign up with email/password, and other required information
+  SignUp(userProfile: UserProfile) {
     return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(userProfile.email, userProfile.password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         // this.SendVerificationMail();
-        this.SetUserData(result.user);
+        this.SetUserData(userProfile);
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -95,41 +127,39 @@ export class AuthenticationService {
     return user !== null ? true : false;
   }
 
-  // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      if (res) {
-        this.router.navigate(['/']);
-      }
-    });
-  }
-
-  // Auth logic to run auth providers
-  AuthLogin(provider: any) {
-    return this.afAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['/']);
-        });
-        this.SetUserData(result.user);
-      })
-      .catch((error) => {
-        window.alert(error);
-      });
-  }
+  // // Sign in with Google
+  // GoogleAuth() {
+  //   return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+  //     if (res) {
+  //       this.router.navigate(['/']);
+  //     }
+  //   });
+  // }
+//Auth login and google login shall be implemented later
+  // // Auth logic to run auth providers
+  // AuthLogin(provider: any) {
+  //   return this.afAuth
+  //     .signInWithPopup(provider)
+  //     .then((result) => {
+  //       this.ngZone.run(() => {
+  //         this.router.navigate(['/']);
+  //       });
+  //       this.SetUserData(result.user);        
+  //     })
+  //     .catch((error) => {
+  //       window.alert(error);
+  //     });
+  // }
 
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user: any) {
+  SetUserData(user: UserProfile) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
+      `users/${user.email}`
     );
-    const userData: UserProfile = {
-      email: user.email,
-    };
-    return userRef.set(userData, {
+
+    return userRef.set(user, {
       merge: true,
     });
   }

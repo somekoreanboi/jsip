@@ -1,6 +1,5 @@
 <div class="form-container mat-elevation-z5">
-    <!-- <form [formGroup]="signUpForm" (ngSubmit)="submit()"> -->
-    <form [formGroup]="signUpForm">
+    <form [formGroup]="signUpForm" (ngSubmit)="signup()">
 
 
         <mat-form-field>
@@ -106,7 +105,7 @@
 
       <mat-form-field appearance="fill" style="font-size: 2vh;">
         <mat-label>Where would you like to work in the future?</mat-label>
-        <mat-select formControlName="yearOfStudy" multiple>
+        <mat-select formControlName="futureWorkplace" multiple>
           <mat-option value="japan">Japan</mat-option>
           <mat-option value="america">America</mat-option>
           <mat-option value="singapore">Singapore</mat-option>
