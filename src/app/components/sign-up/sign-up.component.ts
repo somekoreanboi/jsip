@@ -3,7 +3,6 @@ import {Country} from '@angular-material-extensions/select-country';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserProfile } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -151,29 +150,6 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.get('nationality');
   }
 
-  public sendNotificationMail(userProfile: UserProfile) {
-      emailjs.send("service_14f2b2e","template_faqxazn",{
-        name: userProfile.name,
-        email: userProfile.email,
-        nationality: userProfile.nationality,
-        birthday: userProfile.birthday,
-        gender: userProfile.gender,
-        universityName: userProfile.universityName,
-        graduationPeriod: userProfile.graduationPeriod,
-        yearOfStudy: userProfile.yearOfStudy,
-        faculty: userProfile.faculty,
-        japaneseProficiency: userProfile.japaneseProficiency,
-        futureWorkPlace: userProfile.futureWorkPlace,
-        jobType: userProfile.jobType,
-        interestedIndustry: userProfile.interestedIndustry,
-        reason: userProfile.reason,
-        expectation: userProfile.expectation,
-        standOut: userProfile.standOut,
-        },
-        'WGH4g3DXxavORwVuf'
-        );
-      // emailjs.sendForm("service_14f2b2e","template_faqxazn", this.signUpForm);
-  }
 
   
 
@@ -200,9 +176,8 @@ export class SignUpComponent implements OnInit {
 
     if (this.signUpForm.valid) {
       this.authService.SignUp(userData)
-      this.sendNotificationMail(userData);
     } else {
-      window.alert("Invalid form!");
+      window.alert("It seems like you didn't fill in the sign-up form properly!");
     }
   }
 

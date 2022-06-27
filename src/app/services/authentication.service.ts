@@ -6,6 +6,8 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +34,30 @@ export class AuthenticationService {
       }
     });
   }
+
+  public sendNotificationMail(userProfile: UserProfile) {
+    emailjs.send("service_14f2b2e","template_faqxazn",{
+      name: userProfile.name,
+      email: userProfile.email,
+      nationality: userProfile.nationality,
+      birthday: userProfile.birthday,
+      gender: userProfile.gender,
+      universityName: userProfile.universityName,
+      graduationPeriod: userProfile.graduationPeriod,
+      yearOfStudy: userProfile.yearOfStudy,
+      faculty: userProfile.faculty,
+      japaneseProficiency: userProfile.japaneseProficiency,
+      futureWorkPlace: userProfile.futureWorkPlace,
+      jobType: userProfile.jobType,
+      interestedIndustry: userProfile.interestedIndustry,
+      reason: userProfile.reason,
+      expectation: userProfile.expectation,
+      standOut: userProfile.standOut,
+      },
+      'WGH4g3DXxavORwVuf'
+      );
+    // emailjs.sendForm("service_14f2b2e","template_faqxazn", this.signUpForm);
+}
 
   // Sign in with email/password
   SignIn(email:string, password:string) {
@@ -91,6 +117,7 @@ export class AuthenticationService {
         up and returns promise */
         // this.SendVerificationMail();
         this.SetUserData(userProfile);
+        this.sendNotificationMail(userProfile);
         this.router.navigate(['/']);
       })
       .catch((error) => {
@@ -118,6 +145,7 @@ export class AuthenticationService {
         window.alert(error);
       });
   }
+
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
