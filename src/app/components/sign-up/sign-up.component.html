@@ -1,9 +1,9 @@
 <div class="form-container mat-elevation-z5">
-    <form [formGroup]="signUpForm" (ngSubmit)="signup()">
+    <form [formGroup]="signUpForm" (ngSubmit)="signup($event)">
 
 
         <mat-form-field>
-            <input matInput placeholder="Name" formControlName="name"/>
+            <input matInput placeholder="Name" formControlName="name" name="from_name"/>
             <mat-error *ngIf="name?.errors?.['required']">
               Name is required
             </mat-error>

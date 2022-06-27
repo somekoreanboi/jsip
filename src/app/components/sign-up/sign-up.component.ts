@@ -3,6 +3,7 @@ import {Country} from '@angular-material-extensions/select-country';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserProfile } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -168,7 +169,16 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.get('industryField');
   }
 
-  signup() {
+  public sendNotificationMail(e: Event) {
+    emailjs.sendForm('service_14f2b2e', 'template_faqxazn', e.target as HTMLFormElement, 'WGH4g3DXxavORwVuf')
+      .then((result: EmailJSResponseStatus) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+  }
+
+  signup(e: Event) {
     const userData: UserProfile = {
       name: this.name?.value,
       email: this.email?.value,
@@ -190,11 +200,10 @@ export class SignUpComponent implements OnInit {
 
     if (this.signUpForm.valid) {
       this.authService.SignUp(userData)
+      this.sendNotificationMail(e);
     } else {
       window.alert("Invalid form!");
     }
-
-    console.log(JSON.stringify(userData))
   }
 
 }
