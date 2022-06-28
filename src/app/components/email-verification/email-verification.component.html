@@ -1,0 +1,19 @@
+<div fxLayout="column" fxLayoutAlign="start center" class="mat-body-1" *ngIf="authService.userData as user" >
+    <section class="mat-h2">
+        <p><mark> We have sent a confirmation email to <strong>{{ user.email }}</strong> when you signed up!</mark></p>
+        <p><mark>Please check your email and click on the link to verfiy your email
+            address. If you haven't received any emails, please check your spam folder.
+        <button (click)="authService.SendVerificationMail()" mat-raised-button color="primary">Resend Verification Email</button>
+        <p>Or, you can just logout if you want
+            <button (click)="authService.SignOut()" mat-raised-button color="accent">Logout</button>
+        </p>
+    </mark></p>
+    </section>
+</div>
+
+
+    
+  
+  
+  
+    

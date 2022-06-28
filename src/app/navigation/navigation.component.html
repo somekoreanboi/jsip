@@ -39,7 +39,9 @@
       >
     </ng-template>
 
+    <!-- <ng-container *ngIf="authService.userData as user; else loginButton"> -->
     <ng-container *ngIf="authService.userData as user; else loginButton">
+
      
       <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/my_profile']">
         <mat-icon>account_circle</mat-icon>

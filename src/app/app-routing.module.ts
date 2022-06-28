@@ -12,6 +12,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { SecureInnerPagesGuard } from './guard/secure-inner-pages.guard';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { AuthGuard } from './guard/auth.guard';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { EmailGuard } from './guard/email.guard';
 
 
 const routes: Routes = [
@@ -21,6 +23,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
   { path: 'login', component: LoginPageComponent, canActivate: [SecureInnerPagesGuard],},
   { path: 'signup', component: SignUpComponent, canActivate: [SecureInnerPagesGuard],},
+  { path: 'email_verification', component: EmailVerificationComponent, canActivate: [EmailGuard], },
   { path: 'my_profile', component: MyProfileComponent, canActivate: [AuthGuard], },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

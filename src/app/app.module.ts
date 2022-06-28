@@ -51,6 +51,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 
 
 
@@ -71,6 +72,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     SignUpComponent,
     ConfirmationDialogComponent,
     MyProfileComponent,
+    EmailVerificationComponent,
   ],
   imports: [
     BrowserModule,

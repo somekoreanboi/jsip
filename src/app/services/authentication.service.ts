@@ -64,7 +64,6 @@ export class AuthenticationService {
       },
       'WGH4g3DXxavORwVuf'
       );
-    // emailjs.sendForm("service_14f2b2e","template_faqxazn", this.signUpForm);
 }
 
   // Sign in with email/password
@@ -73,8 +72,13 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-        this.router.navigate(['/']);
-        this.openSnackBar("Logged in successfully!")
+          if (this.isVerified !== true) {
+            this.router.navigate(['/email_verification']);
+            this.openSnackBar("Your email is not verified yet!");
+          } else {
+            this.router.navigate(['/']);
+            this.openSnackBar("Logged in successfully!");
+          }
         });
         // const userRef: AngularFirestoreDocument<any> = this.afs.doc(
         //   `users/${email}`
@@ -104,7 +108,7 @@ export class AuthenticationService {
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
-        // this.SendVerificationMail();
+        this.SendVerificationMail();
         this.SetUserData(userProfile);
         this.sendNotificationMail(userProfile);
         this.router.navigate(['/']);
@@ -116,13 +120,13 @@ export class AuthenticationService {
   }
 
   // Send email verfificaiton when new user sign up
-  // SendVerificationMail() {
-  //   return this.afAuth.currentUser
-  //     .then((u: any) => u.sendEmailVerification())
-  //     .then(() => {
-  //       this.router.navigate(['verify-email-address']);
-  //     });
-  // }
+  SendVerificationMail() {
+    return this.afAuth.currentUser
+      .then((u: any) => u.sendEmailVerification())
+      .then(() => {
+        this.router.navigate(['email_verification']);
+      });
+  }
 
   // Reset Forggot password
   ForgotPassword(passwordResetEmail: string) {
@@ -137,12 +141,18 @@ export class AuthenticationService {
   }
 
 
-  // Returns true when user is looged in and email is verified
+  // Returns true when user is looged in
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     //Todo: Implement email verification function
     // return user !== null && user.emailVerified !== false ? true : false;
     return user !== null ? true : false;
+  }
+
+  // Returns true when user is looged in and email is verified
+  get isVerified(): boolean {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user !== null && user.emailVerified !== false ? true : false;
   }
 
   // // Sign in with Google
@@ -186,11 +196,22 @@ export class AuthenticationService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['/']);
-      //refresh when sign out
       window.location.reload();
-    
+      this.router.navigate(['/home']);
+      //refresh when sign out
+  
       window.alert("logged out successfully!")
     });
   }
+
+  // checkVerification() {
+  //   if (this.isLoggedIn) {
+  //     if (this.isVerified) {
+  //       return;
+  //     } else {
+  //       window.alert("Your email is not verified yet!")
+  //       this.router.navigate(['email_verification']);
+  //     }
+  //   } 
+  // }
 }
