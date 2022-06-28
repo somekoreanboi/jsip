@@ -26,7 +26,7 @@
         <a [routerLink]="['/']">
             <img alt="HTML" src="assets/photos/jlink_logo.png" style="margin-left: 20%; width: 30%;">
         </a>
-        <strong *ngIf="authService.userData as user;" class="welcome">Welcome to JSIP, {{user.email}}!</strong>
+        <!-- <strong *ngIf="authService.userData as user;" class="welcome">Welcome to JSIP, {{user.email}}!</strong> -->
     </div>
 
     <mat-toolbar style="background-color: white; width: fit-content; float:right; margin-top: 2%;">
@@ -40,10 +40,17 @@
     </ng-template>
 
     <ng-container *ngIf="authService.userData as user; else loginButton">
-    <button class="menus" mat-button (click)="logout()">
-        <mat-icon>logout</mat-icon>
-      Logout
-    </button>
+     
+      <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/my_profile']">
+        <mat-icon>account_circle</mat-icon>
+      My Profile
+      </button>
+
+      <button class="menus" mat-button (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+
   </ng-container>
 
   <ng-template #loginButton>
@@ -52,13 +59,14 @@
   Login
   </button>
 
-  <a class="menus" mat-button routerLinkActive="active" [routerLink]="['/signup']">
-    Sign Up
-  </a>
+  <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/signup']">
+    <mat-icon>group_add</mat-icon>
+  Sign Up
+  </button>
 
-            </ng-template>
+  </ng-template>
 
-        </div>
+    </div>
 
         <!-- Side menu bar toggle button for mobile -->
         <button mat-button [mat-menu-trigger-for]="menu" fxShow fxHide.gt-sm style="margin-left:-5%;">
@@ -73,7 +81,8 @@
         <button mat-menu-item routerLink="/companies">Internship Opportunities</button>
         <button mat-menu-item routerLink="/contactus">Contact Us</button>
         <ng-container *ngIf="authService.userData as user; else sideLoginButton">
-            <button mat-menu-item (click)="logout()">Logout</button>
+          <button mat-menu-item routerLink="/my_profile">My Profile</button>  
+          <button mat-menu-item (click)="logout()">Logout</button>
         </ng-container>
         <ng-template #sideLoginButton>
             <button mat-menu-item routerLink="/login">Login</button>

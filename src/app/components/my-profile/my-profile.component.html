@@ -27,18 +27,13 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field style="padding-bottom: 1%;">
+      <mat-form-field>
         <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password"/>
-        <mat-error *ngIf="confirmPassword?.errors?.['required']">
+        <mat-error *ngIf="password?.errors?.['required']">
           Confirm Password is required
         </mat-error>
       </mat-form-field>
-
-      <div style="padding-bottom: 5%; font-size: 120%;">
-      <mat-error *ngIf="signUpForm?.errors?.['passwordsDontMatch']">
-        Passwords should match
-      </mat-error>   
-      </div>
+      
 
       <mat-select-country appearance="outline" 
       style="width: 300%;"
@@ -146,26 +141,6 @@
         </mat-select>
         <mat-error *ngIf="industryField?.hasError('required')">Please choose at least one</mat-error>
       </mat-form-field>
-
-      <!-- <mat-form-field  style="font-size: 2vh;">
-        <input matInput placeholder="Why are you looking for job opportunity at
-         a Japanese company?" formControlName="reason" name="reason">
-        <mat-error *ngIf="reason?.errors?.['required']">
-          Reason is required
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field style="font-size: 1.5vh;">
-        <input matInput placeholder="What do you expect from working at a Japanese 
-         company?" formControlName="expectation" name="expectation">
-        <mat-error *ngIf="expectation?.errors?.['required']">
-          Expectation is required
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field style="font-size: 1.5vh;">
-        <input matInput placeholder="What makes you stand out? (Skills, Certificate, Experience etc)" formControlName="standOut" name="standOut"/>
-      </mat-form-field> -->
 
       <div class="center margin-top">
       <button mat-raised-button color="primary" type="submit">

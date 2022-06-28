@@ -46,6 +46,9 @@ import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthenticationService } from './services/authentication.service';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
 
 
 
@@ -64,6 +67,8 @@ import { AuthenticationService } from './services/authentication.service';
     JumbotronComponent,
     LoginPageComponent,
     SignUpComponent,
+    ConfirmationDialogComponent,
+    MyProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +77,7 @@ import { AuthenticationService } from './services/authentication.service';
     FlexLayoutModule,
     AppRoutingModule,
     MatCardModule,
+    MatSnackBarModule,
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,

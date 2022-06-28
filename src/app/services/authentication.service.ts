@@ -7,6 +7,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Injectable({
@@ -19,7 +20,8 @@ export class AuthenticationService {
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private _snackBar: MatSnackBar,
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -32,6 +34,12 @@ export class AuthenticationService {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
+    });
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, "OK", {
+      duration: 5000,
     });
   }
 
@@ -50,9 +58,9 @@ export class AuthenticationService {
       futureWorkPlace: userProfile.futureWorkPlace,
       jobType: userProfile.jobType,
       interestedIndustry: userProfile.interestedIndustry,
-      reason: userProfile.reason,
-      expectation: userProfile.expectation,
-      standOut: userProfile.standOut,
+      // reason: userProfile.reason,
+      // expectation: userProfile.expectation,
+      // standOut: userProfile.standOut,
       },
       'WGH4g3DXxavORwVuf'
       );
@@ -65,42 +73,23 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/']);
+        this.router.navigate(['/']);
+        this.openSnackBar("Logged in successfully!")
         });
-        const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-          `users/${email}`
-        );
-        // const userProfile: UserProfile = {
-        //   name = userRef.get(),
-        //   email: string,
-        //   password: string,
-        //   nationality: string,
-        //   birthday: string,
-        //   gender: string,
-        //   universityName: string,
-        //   graduationPeriod: string,
-        //   yearOfStudy: string,
-        //   faculty: string,
-        //   japaneseProficiency: string,
-        //   futureWorkPlace: string,
-        //   interestedIndustry: string,
-        //   reason: string,
-        //   expectation: string,
-        //   standOut: string,
-        // }
-        // this.SetUserData(userProfile);
-        console.log("testasdfasfdasdfasdftestsdfsdf");
-        userRef.
-        ref
-        .get()
-        .then((doc) => {
-            if (doc.exists) {
-                const userProfile: UserProfile = doc.data();
-                this.SetUserData(userProfile);
-            } else {
-                window.alert("Error while loading user data!")
-            }
-         })
+        // const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+        //   `users/${email}`
+        // );
+        // userRef.
+        // ref
+        // .get()
+        // .then((doc) => {
+        //     if (doc.exists) {
+        //         const userProfile: UserProfile = doc.data();
+        //         this.SetUserData(userProfile);
+        //     } else {
+        //         window.alert("Error while loading user data!")
+        //     }
+        //  })
 
       })
       .catch((error) => {
@@ -119,6 +108,7 @@ export class AuthenticationService {
         this.SetUserData(userProfile);
         this.sendNotificationMail(userProfile);
         this.router.navigate(['/']);
+        this.openSnackBar("Signed up successfully!")
       })
       .catch((error) => {
         window.alert(error.message);
@@ -196,9 +186,11 @@ export class AuthenticationService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      this.router.navigate(['/']);
       //refresh when sign out
       window.location.reload();
-      this.router.navigate(['/']);
+    
+      window.alert("logged out successfully!")
     });
   }
 }

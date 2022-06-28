@@ -4,36 +4,17 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirectiv
 import { UserProfile } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
-export function passwordsMatchValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (password && confirmPassword && password != confirmPassword) {
-      return {
-        passwordsDontMatch: true
-      }
-    }
-
-    return null;
-
-  };
-
-
-}
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  selector: 'app-my-profile',
+  templateUrl: './my-profile.component.html',
+  styleUrls: ['./my-profile.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class MyProfileComponent implements OnInit {
 
   signUpForm = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    confirmPassword: new FormControl('', Validators.required),
     gender: new FormControl('', [Validators.required]),
     dateOfBirth: new FormControl('', [Validators.required]),
     nameOfUniversity: new FormControl('', [Validators.required]),
@@ -51,7 +32,6 @@ export class SignUpComponent implements OnInit {
 
 
 
-  }, { validators: passwordsMatchValidator(), 
   },)
 
 
@@ -177,7 +157,7 @@ export class SignUpComponent implements OnInit {
     if (this.signUpForm.valid) {
       this.authService.SignUp(userData)
     } else {
-      this.authService.openSnackBar("It seems like you didn't fill in the sign-up form properly!");
+      window.alert("It seems like you didn't fill in the sign-up form properly!");
     }
   }
 

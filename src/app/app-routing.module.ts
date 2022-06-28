@@ -10,6 +10,8 @@ import { LoginPageComponent } from './login-page/login-page/login-page.component
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { AuthenticationService } from './services/authentication.service';
 import { SecureInnerPagesGuard } from './guard/secure-inner-pages.guard';
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
@@ -18,8 +20,8 @@ const routes: Routes = [
   { path: 'companies', component: PictureGridComponent, data: { label: 'Internship Opportunities'}},
   { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
   { path: 'login', component: LoginPageComponent, canActivate: [SecureInnerPagesGuard],},
-  // { path: 'login', component: LoginPageComponent, data: { label: 'Login'}},
   { path: 'signup', component: SignUpComponent, canActivate: [SecureInnerPagesGuard],},
+  { path: 'my_profile', component: MyProfileComponent, canActivate: [AuthGuard], },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

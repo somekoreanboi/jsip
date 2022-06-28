@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Company } from 'src/app/interfaces/company';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import {MatDialog} from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 
 @Component({
@@ -13,17 +15,30 @@ export class CompanyDetailsComponent implements OnInit {
 
   @Input() company!: Company
 
-  constructor(public authService: AuthenticationService) {}
+  constructor(public authService: AuthenticationService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
   }
 
+  openConfirmationDialog(): void {
+    this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+    });
+  }
+
+
   challenge() {
     if (this.authService.isLoggedIn == true) {
-      window.alert("You are logged in!")
+     this.openConfirmationDialog()
     } else {
       window.alert("You are not logged in!")
     }
   }
 
+
+
+
 }
+
+
+  

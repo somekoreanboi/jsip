@@ -13,7 +13,7 @@ export interface UserProfile {
     futureWorkPlace?: string;
     jobType?: string;
     interestedIndustry?: string;
-    reason?: string;
-    expectation?: string;
-    standOut?: string;
+    // reason?: string;
+    // expectation?: string;
+    // standOut?: string;
   }
