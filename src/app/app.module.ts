@@ -34,7 +34,7 @@ import { CompanyDetailsComponent } from './components/company-details/company-de
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 import { HotToastModule } from '@ngneat/hot-toast';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginPageComponent } from './login-page/login-page/login-page.component';
@@ -49,6 +49,8 @@ import { AuthenticationService } from './services/authentication.service';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -87,6 +89,8 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     MatSelectCountryModule.forRoot('en'), // you can use 'br' | 'de' | 'en' | 'es' | 'fr' | 'hr' | 'it' | 'nl' | 'pt' --> MatSelectCountrySupportedLanguages
@@ -94,6 +98,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
     MatSelectModule,
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
+    FormsModule,
     
     
     

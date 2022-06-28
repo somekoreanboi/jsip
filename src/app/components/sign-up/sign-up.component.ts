@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import {Country} from '@angular-material-extensions/select-country'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserProfile } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+
 
 export function passwordsMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -149,8 +150,7 @@ export class SignUpComponent implements OnInit {
   get nationality() {
     return this.signUpForm.get('nationality');
   }
-
-
+  
   
 
   signup() {
