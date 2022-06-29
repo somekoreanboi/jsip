@@ -1,10 +1,12 @@
+// mat-card {
+//     margin-left: none;
+// }
 img {
     height: 100px;
     width: 70%;
     display: block;
-    margin-top: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    padding-top: 10px;
 }
 
 img:hover {
@@ -14,15 +16,12 @@ img:hover {
 .mat-card-title {
     font-size: 200%;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .mat-card {
     display: flex;
     flex-direction: column;
-}
-
-.mat-card-header {
-    flex-shrink: 0;
 }
 
 .mat-card-content {

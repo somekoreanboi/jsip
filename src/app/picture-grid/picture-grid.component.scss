@@ -4,7 +4,12 @@
     padding: 15px;
 }
 
+.content {
+    width: 100vw;
+}
+
 .card-container {
-    margin-left: 9%;
-    width: 50%;
+    margin: 0 3%;
+    width: 80%;
+    height: fit-content;
 }
