@@ -1,8 +1,10 @@
 .mat-body-1 {
     position: relative;
     height: 80vh;
+    float: right;
+    width: 80vw;
     background-image: linear-gradient(to right, rgb(255, 255, 255), 60%, rgba(255, 255, 255, 0.1)), url("../../assets/photos/aboutus.jpg");
-    background-size: 70%;
+    background-size: 100%;
     background-position: 100% 50%;
     background-repeat: no-repeat;
 }

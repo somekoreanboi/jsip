@@ -1,17 +1,30 @@
+// mat-card {
+//     margin-left: none;
+// }
+img {
+    height: 100px;
+    width: 70%;
+    display: block;
+    margin: auto;
+    padding-top: 10px;
+}
+
 img:hover {
     transform: scale(1.1);
-    }
+}
 
-.mat-card{
-    display:flex;
+.mat-card-title {
+    font-size: 200%;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.mat-card {
+    display: flex;
     flex-direction: column;
-    }
-    
-    .mat-card-header {
-    flex-shrink: 0;
-    }
-    
-    .mat-card-content{
+}
+
+.mat-card-content {
     flex-grow: 1;
     overflow: auto;
-    }
+}
