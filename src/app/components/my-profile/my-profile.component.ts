@@ -3,6 +3,7 @@ import {Country} from '@angular-material-extensions/select-country';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserProfile } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -46,10 +47,25 @@ export class MyProfileComponent implements OnInit {
     callingCode: '+65'
   };
 
-  constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,) {
+  constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,  public afs: AngularFirestore,) {
    }
 
   ngOnInit(): void {
+
+      const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${this.authService.userData.email}`
+    );
+    userRef.
+    ref
+    .get()
+    .then((doc) => {
+        if (doc.exists) {
+            const userProfile: UserProfile = doc.data();
+            console.log(userProfile);
+        } else {
+            window.alert("Error while loading user data!")
+        }
+      })
 
   }
 

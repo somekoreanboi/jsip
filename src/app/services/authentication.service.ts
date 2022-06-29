@@ -43,7 +43,7 @@ export class AuthenticationService {
     });
   }
 
-  public sendNotificationMail(userProfile: UserProfile) {
+  public sendNewMemberMail(userProfile: UserProfile) {
     emailjs.send("service_14f2b2e","template_faqxazn",{
       name: userProfile.name,
       email: userProfile.email,
@@ -72,7 +72,7 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          if (this.isVerified !== true) {
+          if (!result.user?.emailVerified) {
             this.router.navigate(['/email_verification']);
             this.openSnackBar("Your email is not verified yet!");
           } else {
@@ -110,7 +110,7 @@ export class AuthenticationService {
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(userProfile);
-        this.sendNotificationMail(userProfile);
+        this.sendNewMemberMail(userProfile);
         this.router.navigate(['/']);
         this.openSnackBar("Signed up successfully!")
       })
@@ -125,6 +125,7 @@ export class AuthenticationService {
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
         this.router.navigate(['email_verification']);
+        this.openSnackBar("Verification email sent successfully!");
       });
   }
 

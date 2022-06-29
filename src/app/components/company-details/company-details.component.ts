@@ -4,6 +4,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import {MatDialog} from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
+import { AskDialogComponent } from '../ask-dialog/ask-dialog.component';
 
 
 @Component({
@@ -21,17 +22,28 @@ export class CompanyDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
   openConfirmationDialog(): void {
     this.dialog.open(ConfirmationDialogComponent, {
-      width: '250px',
+      // width: '250px',
     });
   }
+
+  openAskDialog(): void {
+    this.dialog.open(AskDialogComponent, {
+      data: {
+        functionHolder: () => { this.openConfirmationDialog(); }
+      }
+      // width: '250px',
+    });
+  }
+
 
 
   challenge() {
     if (this.authService.isLoggedIn) {
       if (this.authService.isVerified) {
-        this.openConfirmationDialog()
+        this.openAskDialog();
       } else {
         window.alert("Your email is not verified yet!")
         this.router.navigate(['/email_verification']);

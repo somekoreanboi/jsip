@@ -52,6 +52,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { AskDialogComponent } from './components/ask-dialog/ask-dialog.component';
 
 
 
@@ -73,6 +74,7 @@ import { EmailVerificationComponent } from './components/email-verification/emai
     ConfirmationDialogComponent,
     MyProfileComponent,
     EmailVerificationComponent,
+    AskDialogComponent,
   ],
   imports: [
     BrowserModule,
