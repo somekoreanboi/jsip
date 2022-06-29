@@ -20,7 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -49,6 +49,7 @@ import { ObserversModule } from '@angular/cdk/observers';
 
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 import {HttpClientModule} from '@angular/common/http';
+import { MY_DATE_FORMATS } from '../models/my-date-formats';
 
 const materialModules = [
   MatAutocompleteModule,
@@ -95,6 +96,8 @@ const materialModules = [
   declarations: [],
   imports: [CommonModule, ...materialModules, CdkTableModule, ObserversModule, PlatformModule],
   exports: [...materialModules, CdkTableModule, ObserversModule, PlatformModule],
-  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } }],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
+  ],
 })
 export class CustomMaterialModule {}

@@ -1,6 +1,6 @@
 <div class="form-container mat-elevation-z5">
-    <form [formGroup]="signUpForm" (ngSubmit)="signup()">
-
+    <!-- <form [formGroup]="signUpForm"> -->
+    <form [formGroup]="signUpForm" (ngSubmit)="submitEdit()">
 
         <mat-form-field>
             <input matInput placeholder="Name" formControlName="name" name="name"/>
@@ -33,13 +33,17 @@
     <mat-error *ngIf="nationality?.errors?.['required']">
         Nationality is required.
     </mat-error>
-
-    <mat-form-field  style="padding-top: 5%;">
-        <input matInput placeholder="Date of birth" formControlName="dateOfBirth" name="dateOfBirth" type=date/>
-        <mat-error *ngIf="password?.errors?.['required']">
-          Date of birth is required.
-        </mat-error>
-      </mat-form-field>
+    
+    <mat-form-field appearance="fill" style="padding-top: 5%;" >
+      <mat-label>Date of Birth</mat-label>
+      <input matInput [matDatepicker]="picker"  formControlName="dateOfBirth" name="dateOfBirth">
+      <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="dateOfBirth?.errors?.['required']">
+        Date of birth is required.
+      </mat-error>
+    </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Gender</mat-label>
@@ -132,7 +136,8 @@
       </mat-form-field>
 
       <div class="center margin-top buttons">
-      <button mat-raised-button color="primary">
+      <ng-container *ngIf="!isEditing; else submitEditButton">
+      <button mat-raised-button color="primary" (click)="toggleEditMode()">
         Edit my profile
       </button>
       <button mat-raised-button color="primary">
@@ -141,6 +146,12 @@
       <button mat-raised-button color="primary">
         Change Password
       </button>
+    </ng-container>
+    <ng-template #submitEditButton>
+      <button mat-raised-button color="primary" type="submit">
+        Submit
+      </button>  
+    </ng-template>
     </div>
     </form>
     </div>

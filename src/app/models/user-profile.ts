@@ -3,7 +3,7 @@ import { Country } from "@angular-material-extensions/select-country";
 export interface UserProfile {
     name?: string;  
     email: string;
-    password: string;
+    password?: string;
     nationality?: Country;
     birthday?: string;
     gender?: string;

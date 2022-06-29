@@ -50,11 +50,10 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { AskDialogComponent } from './components/ask-dialog/ask-dialog.component';
-
-
+import { MY_DATE_FORMATS } from './models/my-date-formats';
 
 
 @NgModule({
@@ -109,6 +108,7 @@ import { AskDialogComponent } from './components/ask-dialog/ask-dialog.component
   ],
   providers: [
     AuthenticationService,
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS }
   ],
   bootstrap: [AppComponent]
 })

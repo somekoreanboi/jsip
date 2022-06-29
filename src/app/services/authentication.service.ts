@@ -104,7 +104,7 @@ export class AuthenticationService {
   // Sign up with email/password, and other required information
   SignUp(userProfile: UserProfile) {
     return this.afAuth
-      .createUserWithEmailAndPassword(userProfile.email, userProfile.password)
+      .createUserWithEmailAndPassword(userProfile.email, userProfile.password!)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */

@@ -3,6 +3,7 @@ import {Country} from '@angular-material-extensions/select-country';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserProfile } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import * as moment from 'moment';
 
 
 export function passwordsMatchValidator(): ValidatorFn {
@@ -151,7 +152,11 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.get('nationality');
   }
   
-  
+  convertMoment(date: any) {
+    const momentDate = new Date(date); // Replace event.value with your date value
+    const formattedDate = moment(momentDate).format("YYYY-MM-DD");
+    return formattedDate;
+  }
 
   signup() {
     const userData: UserProfile = {
@@ -159,10 +164,10 @@ export class SignUpComponent implements OnInit {
       email: this.email?.value,
       password: this.password?.value,
       nationality: this.nationality?.value,
-      birthday: this.dateOfBirth?.value,
+      birthday: this.convertMoment(this.dateOfBirth?.value),
       gender: this.gender?.value,
       universityName: this.nameOfUniversity?.value,
-      graduationPeriod: this.graduationPeriod?.value,
+      graduationPeriod: this.convertMoment(this.graduationPeriod?.value),
       yearOfStudy: this.yearOfStudy?.value,
       faculty: this.major?.value,
       japaneseProficiency: this.japaneseProficiency?.value,

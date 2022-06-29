@@ -5,6 +5,9 @@ import { UserProfile } from 'src/app/models/user-profile';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
+import * as _moment from 'moment';
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-my-profile',
@@ -13,31 +16,50 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 })
 export class MyProfileComponent implements OnInit {
 
+  selectedGender = 'male';
+  isEditing = false;
+
   signUpForm = new FormGroup({
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.email, Validators.required]),
-    gender: new FormControl('', [Validators.required]),
-    dateOfBirth: new FormControl('', [Validators.required]),
-    nameOfUniversity: new FormControl('', [Validators.required]),
-    graduationPeriod: new FormControl('', [Validators.required]),
-    yearOfStudy: new FormControl('', [Validators.required]),
-    japaneseProficiency: new FormControl('', [Validators.required]),
-    major: new FormControl('',),
-    jobType: new FormControl('', [Validators.required]),
+    name: new FormControl({value: '', disabled: true}, Validators.required),
+    email: new FormControl({value: '', disabled: true}, [Validators.email, Validators.required]),
+    gender: new FormControl({value: '', disabled: true}, [Validators.required]),
+    dateOfBirth: new FormControl({value: '', disabled: true}, [Validators.required]),
+    nameOfUniversity: new FormControl({value: '', disabled: true}, [Validators.required]),
+    graduationPeriod: new FormControl({value: '', disabled: true}, [Validators.required]),
+    yearOfStudy: new FormControl({value: '', disabled: true}, [Validators.required]),
+    japaneseProficiency: new FormControl({value: '', disabled: true}, [Validators.required]),
+    major: new FormControl({value: '', disabled: true},),
+    jobType: new FormControl({value: '', disabled: true}, [Validators.required]),
     // standOut: new FormControl('',),
     // reason: new FormControl('', [Validators.required]),
     // expectation: new FormControl('', [Validators.required]),
-    futureWorkplace: new FormControl('', [Validators.required]),
-    industryField: new FormControl('', [Validators.required]),
-    nationality: new FormControl('', [Validators.required]),
-
-
-
+    futureWorkplace: new FormControl({value: '', disabled: true}, [Validators.required]),
+    industryField: new FormControl({value: '', disabled: true}, [Validators.required]),
+    nationality: new FormControl({value: '', disabled: true}, [Validators.required]),
   },)
 
+  toggleEditMode() {
+    if(!this.isEditing){
+      this.isEditing = true;
+      this.authService.openSnackBar("You can edit your profile now!");
+      this.name?.enable();
+      this.email?.enable();
+      this.gender?.enable();
+      this.dateOfBirth?.enable();
+      this.nameOfUniversity?.enable();
+      this.graduationPeriod?.enable();
+      this.yearOfStudy?.enable();
+      this.japaneseProficiency?.enable();
+      this.major?.enable();
+      this.jobType?.enable();
+      this.futureWorkplace?.enable();
+      this.industryField?.enable();
+      this.nationality?.enable();
+    }
+}
 
 
-  selectedGender = 'male';
+
 
   constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,  public afs: AngularFirestore,) {
    }
@@ -64,15 +86,13 @@ export class MyProfileComponent implements OnInit {
 
   setData(userData: any) {
 
-    console.log(this.changeDateFormat(userData.birthday.seconds));
-
     this.signUpForm.setValue({
       name: userData.name,
       email: userData.email,
       nationality: userData.nationality,
-      dateOfBirth: this.changeDateFormat(userData.birthday.seconds),
+      dateOfBirth: userData.birthday,
       nameOfUniversity: userData.universityName,
-      graduationPeriod: this.changeDateFormat(userData.graduationPeriod.seconds),
+      graduationPeriod: userData.graduationPeriod,
       yearOfStudy: userData.yearOfStudy,
       japaneseProficiency: userData.japaneseProficiency,
       major: userData.faculty,
@@ -94,14 +114,6 @@ export class MyProfileComponent implements OnInit {
 
   get email() {
     return this.signUpForm.get('email');
-  }
-
-  get password() {
-    return this.signUpForm.get('password');
-  }
-
-  get confirmPassword() {
-    return this.signUpForm.get('confirmPassword');
   }
 
   get gender() {
@@ -136,18 +148,6 @@ export class MyProfileComponent implements OnInit {
     return this.signUpForm.get('jobType');
   }
 
-  // get standOut() {
-  //   return this.signUpForm.get('standOut');
-  // }
-
-  // get reason() {
-  //   return this.signUpForm.get('reason');
-  // }
-
-  // get expectation() {
-  //   return this.signUpForm.get('expectation');
-  // }
-
   get futureWorkplace() {
     return this.signUpForm.get('futureWorkplace');
   }
@@ -161,38 +161,54 @@ export class MyProfileComponent implements OnInit {
   }
 
 
-  
+  convertMoment(date: any) {
+    const momentDate = new Date(date); // Replace event.value with your date value
+    const formattedDate = moment(momentDate).format("YYYY-MM-DD");
+    return formattedDate;
+  }
 
-  signup() {
+  submitEdit() {
     const userData: UserProfile = {
       name: this.name?.value,
       email: this.email?.value,
-      password: this.password?.value,
-      nationality: this.nationality?.value.name,
-      birthday: this.dateOfBirth?.value,
+      nationality: this.nationality?.value,
+      birthday: this.convertMoment(this.dateOfBirth?.value),
       gender: this.gender?.value,
       universityName: this.nameOfUniversity?.value,
-      graduationPeriod: this.graduationPeriod?.value,
+      graduationPeriod: this.convertMoment(this.graduationPeriod?.value),
       yearOfStudy: this.yearOfStudy?.value,
       faculty: this.major?.value,
       japaneseProficiency: this.japaneseProficiency?.value,
       futureWorkPlace: this.futureWorkplace?.value.toString(),
       jobType: this.jobType?.value.toString(),
       interestedIndustry: this.industryField?.value.toString(),
-      // reason: this.reason?.value,
-      // expectation: this.expectation?.value,
-      // standOut: this.standOut?.value,
     };
 
+    console.log(userData);
+
     if (this.signUpForm.valid) {
-      this.authService.SignUp(userData)
+      this.authService.SetUserData(userData).then(() => {
+        this.isEditing = false;
+        this.name?.disable();
+        this.email?.disable();
+        this.gender?.disable();
+        this.dateOfBirth?.disable();
+        this.nameOfUniversity?.disable();
+        this.graduationPeriod?.disable();
+        this.yearOfStudy?.disable();
+        this.japaneseProficiency?.disable();
+        this.major?.disable();
+        this.jobType?.disable();
+        this.futureWorkplace?.disable();
+        this.industryField?.disable();
+        this.nationality?.disable();
+        this.authService.openSnackBar("Your profile is edited successfully!");
+      }).catch((error) => {
+        window.alert(error.message);
+      });
     } else {
-      window.alert("It seems like you didn't fill in the sign-up form properly!");
+      window.alert("It seems like you didn't fill in the profile properly!");
     }
   }
-
- changeDateFormat(timestamp: string) {
-  return new Date(timestamp).getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
-}
 
 }
