@@ -158,7 +158,7 @@ export class SignUpComponent implements OnInit {
       name: this.name?.value,
       email: this.email?.value,
       password: this.password?.value,
-      nationality: this.nationality?.value.name,
+      nationality: this.nationality?.value,
       birthday: this.dateOfBirth?.value,
       gender: this.gender?.value,
       universityName: this.nameOfUniversity?.value,

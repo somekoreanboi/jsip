@@ -19,20 +19,6 @@
         </mat-error>
 
       </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Password" formControlName="password" type="password"/>
-        <mat-error *ngIf="password?.errors?.['required']">
-          Password is required
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password"/>
-        <mat-error *ngIf="password?.errors?.['required']">
-          Confirm Password is required
-        </mat-error>
-      </mat-form-field>
       
 
       <mat-select-country appearance="outline" 
@@ -42,7 +28,6 @@
       name="nationality"
       (onCountrySelected)="onCountrySelected($event)"
       loadingDB="true"
-      [value]="defaultNationality"
       >
     </mat-select-country>
     <mat-error *ngIf="nationality?.errors?.['required']">
@@ -74,10 +59,14 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Graduation Period" formControlName="graduationPeriod" name="graduationPeriod" type="month"/>
+      <mat-form-field appearance="fill" >
+        <mat-label>Graduation Period</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="graduationPeriod" name="graduationPeriod">
+        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
         <mat-error *ngIf="graduationPeriod?.errors?.['required']">
-           Graduation period is required.
+          Graduation Period is required.
         </mat-error>
       </mat-form-field>
 
@@ -142,9 +131,15 @@
         <mat-error *ngIf="industryField?.hasError('required')">Please choose at least one</mat-error>
       </mat-form-field>
 
-      <div class="center margin-top">
-      <button mat-raised-button color="primary" type="submit">
-        Sign up
+      <div class="center margin-top buttons">
+      <button mat-raised-button color="primary">
+        Edit my profile
+      </button>
+      <button mat-raised-button color="primary">
+        Change Email
+      </button>
+      <button mat-raised-button color="primary">
+        Change Password
       </button>
     </div>
     </form>
