@@ -140,17 +140,19 @@
       <button mat-raised-button color="primary" (click)="toggleEditMode()">
         Edit my profile
       </button>
-      <button mat-raised-button color="primary">
-        Change Email
-      </button>
-      <button mat-raised-button color="primary">
-        Change Password
+      <button mat-raised-button color="primary" (click)="openResetPasswordDialog()" type="button">
+        Reset Password
       </button>
     </ng-container>
     <ng-template #submitEditButton>
+      <button mat-raised-button color="primary" type="button" (click)="cancelEdit()">
+        Cancel
+      </button> 
+      
       <button mat-raised-button color="primary" type="submit">
         Submit
       </button>  
+ 
     </ng-template>
     </div>
     </form>

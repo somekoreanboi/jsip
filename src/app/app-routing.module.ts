@@ -14,6 +14,7 @@ import { MyProfileComponent } from './components/my-profile/my-profile.component
 import { AuthGuard } from './guard/auth.guard';
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { EmailGuard } from './guard/email.guard';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent, canActivate: [SecureInnerPagesGuard],},
   { path: 'email_verification', component: EmailVerificationComponent, canActivate: [EmailGuard], },
   { path: 'my_profile', component: MyProfileComponent, canActivate: [AuthGuard], },
+  { path: 'forgot_password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard], },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

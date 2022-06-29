@@ -8,6 +8,8 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
 import * as _moment from 'moment';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { ResetPasswordDialogComponent } from '../reset-password-dialog/reset-password-dialog.component';
 
 @Component({
   selector: 'app-my-profile',
@@ -61,7 +63,8 @@ export class MyProfileComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,  public afs: AngularFirestore,) {
+  constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,  public afs: AngularFirestore,
+    public dialog: MatDialog) {
    }
 
   ngOnInit(): void {
@@ -160,11 +163,31 @@ export class MyProfileComponent implements OnInit {
     return this.signUpForm.get('nationality');
   }
 
+  openResetPasswordDialog() {
+    this.dialog.open(ResetPasswordDialogComponent, {});
+  }
 
   convertMoment(date: any) {
     const momentDate = new Date(date); // Replace event.value with your date value
     const formattedDate = moment(momentDate).format("YYYY-MM-DD");
     return formattedDate;
+  }
+
+  cancelEdit() {
+    this.isEditing = false;
+    this.name?.disable();
+    this.email?.disable();
+    this.gender?.disable();
+    this.dateOfBirth?.disable();
+    this.nameOfUniversity?.disable();
+    this.graduationPeriod?.disable();
+    this.yearOfStudy?.disable();
+    this.japaneseProficiency?.disable();
+    this.major?.disable();
+    this.jobType?.disable();
+    this.futureWorkplace?.disable();
+    this.industryField?.disable();
+    this.nationality?.disable(); 
   }
 
   submitEdit() {
@@ -184,6 +207,7 @@ export class MyProfileComponent implements OnInit {
       interestedIndustry: this.industryField?.value.toString(),
     };
 
+    
     console.log(userData);
 
     if (this.signUpForm.valid) {

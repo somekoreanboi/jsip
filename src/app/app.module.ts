@@ -54,6 +54,8 @@ import { MatNativeDateModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { AskDialogComponent } from './components/ask-dialog/ask-dialog.component';
 import { MY_DATE_FORMATS } from './models/my-date-formats';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ResetPasswordDialogComponent } from './components/reset-password-dialog/reset-password-dialog.component';
 
 
 @NgModule({
@@ -74,6 +76,8 @@ import { MY_DATE_FORMATS } from './models/my-date-formats';
     MyProfileComponent,
     EmailVerificationComponent,
     AskDialogComponent,
+    ForgotPasswordComponent,
+    ResetPasswordDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -205,6 +205,14 @@ export class AuthenticationService {
     });
   }
 
+  resetPassword() {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return this.afAuth.sendPasswordResetEmail(user.email).
+    then(() => {
+      this.openSnackBar("An email for password reset has been sent successfully to your email!");
+    });
+  }
+
   // checkVerification() {
   //   if (this.isLoggedIn) {
   //     if (this.isVerified) {
