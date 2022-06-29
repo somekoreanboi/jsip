@@ -16,6 +16,15 @@ img:hover {
     cursor: pointer;
 }
 
+#navbar {
+    background-color: white;
+    width: fit-content;
+    float: right;
+    position: fixed;
+    top: 40px;
+    right: 10px
+}
+
 .welcome {
     margin-bottom: 15%;
     margin-left: 5%;
