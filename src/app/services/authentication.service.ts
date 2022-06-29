@@ -47,7 +47,7 @@ export class AuthenticationService {
     emailjs.send("service_14f2b2e","template_faqxazn",{
       name: userProfile.name,
       email: userProfile.email,
-      nationality: userProfile.nationality,
+      nationality: userProfile.nationality?.name,
       birthday: userProfile.birthday,
       gender: userProfile.gender,
       universityName: userProfile.universityName,

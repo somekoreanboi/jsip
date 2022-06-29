@@ -30,7 +30,7 @@ const routes: Routes = [
 ];
 
 const routeOptions: ExtraOptions = {
-  enableTracing: true
+  enableTracing: false
 };
 
 @NgModule({

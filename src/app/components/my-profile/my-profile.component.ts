@@ -39,34 +39,48 @@ export class MyProfileComponent implements OnInit {
 
   selectedGender = 'male';
 
-  defaultNationality: Country = {
-    name: 'Singapore',
-    alpha2Code: 'SG',
-    alpha3Code: 'SGP',
-    numericCode: '702',
-    callingCode: '+65'
-  };
-
   constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,  public afs: AngularFirestore,) {
    }
 
   ngOnInit(): void {
-
-      const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${this.authService.userData.email}`
+    const user_mail = JSON.parse(localStorage.getItem('user')!).email;
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user_mail}`
     );
     userRef.
     ref
     .get()
     .then((doc) => {
         if (doc.exists) {
-            const userProfile: UserProfile = doc.data();
-            console.log(userProfile);
+          const userData = doc.data();
+          console.log(doc.data());
+          this.setData(userData);
         } else {
             window.alert("Error while loading user data!")
         }
       })
 
+  }
+
+  setData(userData: any) {
+
+    console.log(this.changeDateFormat(userData.birthday.seconds));
+
+    this.signUpForm.setValue({
+      name: userData.name,
+      email: userData.email,
+      nationality: userData.nationality,
+      dateOfBirth: this.changeDateFormat(userData.birthday.seconds),
+      nameOfUniversity: userData.universityName,
+      graduationPeriod: this.changeDateFormat(userData.graduationPeriod.seconds),
+      yearOfStudy: userData.yearOfStudy,
+      japaneseProficiency: userData.japaneseProficiency,
+      major: userData.faculty,
+      jobType: userData.jobType.split(','),
+      futureWorkplace: userData.futureWorkPlace.split(','),
+      industryField: userData.interestedIndustry.split(','),
+      gender: userData.gender,
+    })
   }
 
 
@@ -176,5 +190,9 @@ export class MyProfileComponent implements OnInit {
       window.alert("It seems like you didn't fill in the sign-up form properly!");
     }
   }
+
+ changeDateFormat(timestamp: string) {
+  return new Date(timestamp).getFullYear()+'-'+("0"+(new Date().getMonth()+1)).slice(-2)+'-'+("0"+new Date().getDate()).slice(-2)
+}
 
 }
