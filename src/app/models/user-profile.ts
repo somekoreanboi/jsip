@@ -15,6 +15,7 @@ export interface UserProfile {
     futureWorkPlace?: string;
     jobType?: string;
     interestedIndustry?: string;
+    is_admin?: boolean;
     // reason?: string;
     // expectation?: string;
     // standOut?: string;

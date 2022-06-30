@@ -13,10 +13,13 @@ export class EmailGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.authService.isVerified == true) {
-        window.alert('Your email is verified already!');
-        this.router.navigate(['/']);
-      }
+      this.authService.isVerified().then(value => {
+        if (value == true) {
+          window.alert('Your email is verified already!');
+          this.router.navigate(['/']);
+        }
+      })
+
       return true;
   }
   

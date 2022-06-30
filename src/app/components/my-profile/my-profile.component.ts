@@ -68,23 +68,8 @@ export class MyProfileComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    const user_mail = JSON.parse(localStorage.getItem('user')!).email;
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user_mail}`
-    );
-    userRef.
-    ref
-    .get()
-    .then((doc) => {
-        if (doc.exists) {
-          const userData = doc.data();
-          console.log(doc.data());
-          this.setData(userData);
-        } else {
-            window.alert("Error while loading user data!")
-        }
-      })
-
+    const userData = JSON.parse(localStorage.getItem('user')!);
+    this.setData(userData);
   }
 
   setData(userData: any) {

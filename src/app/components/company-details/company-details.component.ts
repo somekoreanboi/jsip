@@ -42,12 +42,19 @@ export class CompanyDetailsComponent implements OnInit {
 
   challenge() {
     if (this.authService.isLoggedIn) {
-      if (this.authService.isVerified) {
-        this.openAskDialog();
-      } else {
-        window.alert("Your email is not verified yet!")
-        this.router.navigate(['/email_verification']);
-      }
+
+      this.authService.isVerified().then(
+        (value)=> {
+          if (value) {
+            this.openAskDialog();
+          } else {
+            window.alert("Your email is not verified yet!")
+            this.router.navigate(['/email_verification']);
+          }
+    
+        }
+      )
+
     } else {
       window.alert("You are not logged in!")
     }

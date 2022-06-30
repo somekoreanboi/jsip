@@ -16,10 +16,13 @@ export class SecureInnerPagesGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.isVerified) {
-      window.alert('You are logged in already!');
-      this.router.navigate(['/']);
-    }
+    this.authService.isVerified().then(value => {
+      if (value) {
+        window.alert('You are logged in already!');
+        this.router.navigate(['/']);
+      }
+    })
+    
     return true;
   }
 }

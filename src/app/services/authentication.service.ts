@@ -3,18 +3,20 @@ import { UserProfile } from '../models/user-profile';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   AngularFirestore,
+  AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Company } from '../interfaces/company';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  userData: any; // Save logged in user data
+  userData?: UserProfile; // Save logged in user data
 
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
@@ -27,12 +29,12 @@ export class AuthenticationService {
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
+        this.GetUserData(user.email!).then(()=>{
+          console.log((this.userData));
+          localStorage.setItem('user', JSON.stringify(this.userData));
+        }); 
       } else {
         localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
       }
     });
   }
@@ -78,22 +80,9 @@ export class AuthenticationService {
           } else {
             this.router.navigate(['/']);
             this.openSnackBar("Logged in successfully!");
+            this.isAdmin()
           }
         });
-        // const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-        //   `users/${email}`
-        // );
-        // userRef.
-        // ref
-        // .get()
-        // .then((doc) => {
-        //     if (doc.exists) {
-        //         const userProfile: UserProfile = doc.data();
-        //         this.SetUserData(userProfile);
-        //     } else {
-        //         window.alert("Error while loading user data!")
-        //     }
-        //  })
 
       })
       .catch((error) => {
@@ -104,7 +93,7 @@ export class AuthenticationService {
   // Sign up with email/password, and other required information
   SignUp(userProfile: UserProfile) {
     return this.afAuth
-      .createUserWithEmailAndPassword(userProfile.email, userProfile.password!)
+      .createUserWithEmailAndPassword(userProfile.email!, userProfile.password!)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
@@ -144,16 +133,17 @@ export class AuthenticationService {
 
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
+    console.log(localStorage.getItem('user')!);
     const user = JSON.parse(localStorage.getItem('user')!);
-    //Todo: Implement email verification function
     // return user !== null && user.emailVerified !== false ? true : false;
     return user !== null ? true : false;
   }
 
-  // Returns true when user is looged in and email is verified
-  get isVerified(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null && user.emailVerified !== false ? true : false;
+  // Returns true if the email is verified
+  async isVerified() {
+    // const user = JSON.parse(localStorage.getItem('user')!);
+    const currentUser = await this.afAuth.currentUser;
+    return currentUser?.emailVerified;
   }
 
   // // Sign in with Google
@@ -190,6 +180,9 @@ export class AuthenticationService {
 
     return userRef.set(user, {
       merge: true,
+    }).then(()=>{
+      this.userData = user;
+      localStorage.setItem('user', JSON.stringify(this.userData));
     });
   }
 
@@ -197,6 +190,7 @@ export class AuthenticationService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      this.userData = undefined;
       window.location.reload();
       this.router.navigate(['/home']);
       //refresh when sign out
@@ -206,21 +200,98 @@ export class AuthenticationService {
   }
 
   resetPassword() {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return this.afAuth.sendPasswordResetEmail(user.email).
+    const user_mail = this.userData?.email;
+    return this.afAuth.sendPasswordResetEmail(user_mail!).
     then(() => {
       this.openSnackBar("An email for password reset has been sent successfully to your email!");
     });
   }
 
-  // checkVerification() {
-  //   if (this.isLoggedIn) {
-  //     if (this.isVerified) {
-  //       return;
-  //     } else {
-  //       window.alert("Your email is not verified yet!")
-  //       this.router.navigate(['email_verification']);
-  //     }
-  //   } 
-  // }
+  isAdmin() {
+    const user_mail = this.userData?.email;
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user_mail}`
+    );
+    userRef.
+    ref
+    .get()
+    .then((doc) => {
+        if (doc.exists) {
+          console.log(doc.data().is_admin);
+        }
+      })
+  }
+
+  GetUserData(email: string) {
+    // const user_mail = JSON.parse(localStorage.getItem('user')!).email;
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${email}`
+    );
+    return userRef.
+    ref
+    .get()
+    .then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          const userData = this.parseUser(data);
+          this.userData = userData;
+          console.log(this.userData);
+        } else {
+            window.alert("Error while loading user data!")
+        }
+      })
+
+  }
+
+  parseUser(data: any): UserProfile {
+    return {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      nationality: data.nationality,
+      birthday: data.birthday,
+      gender: data.gender,
+      universityName: data.universityName,
+      graduationPeriod: data.graduationPeriod,
+      yearOfStudy: data.yearOfStudy,
+      faculty: data.faculty,
+      japaneseProficiency: data.japaneseProficiency,
+      futureWorkPlace: data.futureWorkPlace,
+      jobType: data.jobType,
+      interestedIndustry: data.interestedIndustry,
+      is_admin: data.is_admin,
+    }
+  }
+
+  async GetAllCompanies() {
+    const companies: Company[] = [];
+    const companyCollection: AngularFirestoreCollection<Company> = this.afs.collection(
+      `companies/`
+    );
+    await companyCollection.ref.get()
+    .then((querySnapshot) => { 
+      querySnapshot.forEach(async (company_detail) => {
+        let company: Company = company_detail.data();
+        const opportunitiesCollection = companyCollection.doc(company_detail.id).collection("opportunities").get();
+        opportunitiesCollection.forEach(opportunity => {
+          opportunity.forEach(doc => {
+              let opportunity_data = doc.data();
+              if (company.opportunities == null)  {
+                company.opportunities = [];
+              }
+              company.opportunities?.push(opportunity_data);
+          })
+      });
+      companies.push(company);
+      })
+      
+   }).catch((error)=>{
+        window.alert(error.message);
+      })
+
+      console.log(companies);
+      return companies;
+
+  }
+
 }
