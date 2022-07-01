@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { label: 'Home' } },
   { path: 'about', component: AboutComponent, data: { label: 'About Us' } },
   { path: 'companies', component: PictureGridComponent, data: { label: 'Internship Opportunities'}},
-  { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
+  // { path: 'contact', component: ContactComponent, data: { label: 'Contact Us' } },
   { path: 'login', component: LoginPageComponent, canActivate: [SecureInnerPagesGuard],},
   { path: 'signup', component: SignUpComponent, canActivate: [SecureInnerPagesGuard],},
   { path: 'email_verification', component: EmailVerificationComponent, canActivate: [EmailGuard], },

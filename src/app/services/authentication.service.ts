@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Company } from '../interfaces/company';
+import { Opportunity } from '../interfaces/opportunity';
 
 
 @Injectable({
@@ -45,27 +46,57 @@ export class AuthenticationService {
     });
   }
 
-  public sendNewMemberMail(userProfile: UserProfile) {
+  public sendNewMemberMail() {
     emailjs.send("service_14f2b2e","template_faqxazn",{
-      name: userProfile.name,
-      email: userProfile.email,
-      nationality: userProfile.nationality?.name,
-      birthday: userProfile.birthday,
-      gender: userProfile.gender,
-      universityName: userProfile.universityName,
-      graduationPeriod: userProfile.graduationPeriod,
-      yearOfStudy: userProfile.yearOfStudy,
-      faculty: userProfile.faculty,
-      japaneseProficiency: userProfile.japaneseProficiency,
-      futureWorkPlace: userProfile.futureWorkPlace,
-      jobType: userProfile.jobType,
-      interestedIndustry: userProfile.interestedIndustry,
+      name: this.userData?.name,
+      email: this.userData?.email,
+      nationality: this.userData?.nationality?.name,
+      birthday: this.userData?.birthday,
+      gender: this.userData?.gender,
+      universityName: this.userData?.universityName,
+      graduationPeriod: this.userData?.graduationPeriod,
+      yearOfStudy: this.userData?.yearOfStudy,
+      faculty: this.userData?.faculty,
+      japaneseProficiency: this.userData?.japaneseProficiency,
+      futureWorkPlace: this.userData?.futureWorkPlace,
+      jobType: this.userData?.jobType,
+      interestedIndustry: this.userData?.interestedIndustry,
       // reason: userProfile.reason,
       // expectation: userProfile.expectation,
       // standOut: userProfile.standOut,
       },
       'WGH4g3DXxavORwVuf'
       );
+}
+
+public sendJobApplicationMail(companyName?: string,
+  companyDescription?: string, companybusiness?: string, opportunity?: Opportunity) {
+  emailjs.send("service_14f2b2e","template_3p1n6is",{
+    name: this.userData?.name,
+    email: this.userData?.email,
+    nationality: this.userData?.nationality?.name,
+    birthday: this.userData?.birthday,
+    gender: this.userData?.gender,
+    universityName: this.userData?.universityName,
+    graduationPeriod: this.userData?.graduationPeriod,
+    yearOfStudy: this.userData?.yearOfStudy,
+    faculty: this.userData?.faculty,
+    japaneseProficiency: this.userData?.japaneseProficiency,
+    futureWorkPlace: this.userData?.futureWorkPlace,
+    jobType: this.userData?.jobType,
+    interestedIndustry: this.userData?.interestedIndustry,
+    company_name: companyName,
+    company_description: companyDescription,
+    company_business: companybusiness,
+    job_overview: opportunity?.job_overview,
+    qualifications: opportunity?.qualifications,
+    period: opportunity?.period,
+    monthly_salary: opportunity?.monthly_salary,
+    working_location: opportunity?.working_location,
+    other: opportunity?.other
+    },
+    'WGH4g3DXxavORwVuf'
+    );
 }
 
   // Sign in with email/password
@@ -98,10 +129,11 @@ export class AuthenticationService {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(userProfile);
-        this.sendNewMemberMail(userProfile);
-        this.router.navigate(['/']);
-        this.openSnackBar("Signed up successfully!")
+        this.SetUserData(userProfile).then(()=> {
+          this.sendNewMemberMail();
+          this.router.navigate(['/email_verification']);
+          this.openSnackBar("Signed up successfully Please verify your email!")
+        })
       })
       .catch((error) => {
         window.alert(error.message);

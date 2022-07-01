@@ -1,8 +1,9 @@
 export interface Opportunity {
-    jobOverview?: string;
+    position?: string;
+    job_overview?: string;
     qualifications?: string;
     period?: string;
-    monthlySalary?: string;
-    workingLocation?: string;
+    monthly_salary?: string;
+    working_location?: string;
     other?: string;   
 }

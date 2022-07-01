@@ -2,20 +2,14 @@
     <img (click)="goToLink()" mat-card-image src="{{company.img}}">
     <div style="text-align:center;">
         <mat-card-title>{{company.name}}</mat-card-title>
-        <!-- <mat-card-title style="font-size: 200%; font-weight: bold;">Company to be added</mat-card-title> -->
     </div>
     <br>
     <mat-card-content>
         <p>
             {{company.description}}
-            <!-- Company description to be added. Company description to be added.
-        Company description to be added. Company description to be added.
-        Company description to be added. Company description to be added.
-        Company description to be added. Company description to be added.
-        Company description to be added. Company description to be added. -->
         </p>
     </mat-card-content>
     <div style="text-align: center;">
-        <button mat-button (click)="openCompanyDetails()" style="color: red; text-decoration: underline; font-family: 'Baskerville', serif;">Check Opportunities</button>
+        <button mat-button (click)="openOpportunities()" style="color: red; text-decoration: underline; font-family: 'Baskerville', serif;">Check Opportunities</button>
     </div>
 </mat-card>
