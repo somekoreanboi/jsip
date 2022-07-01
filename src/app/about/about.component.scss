@@ -1,27 +1,35 @@
 .mat-body-1 {
     position: relative;
-    height: 80vh;
+    height: 50vh;
     float: right;
     width: 80vw;
     background-image: linear-gradient(to right, rgb(255, 255, 255), 60%, rgba(255, 255, 255, 0.1)), url("../../assets/photos/aboutus.jpg");
-    background-size: 100%;
-    background-position: 100% 50%;
+    background-size: 60%;
+    background-position: 100% 10%;
     background-repeat: no-repeat;
 }
 
 section {
     position: absolute;
-    top: 30%;
-    left: 25%;
+    top: 10%;
+    left: 10%;
     font-size: 3vw;
     width: 60%
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Open Sans', sans-serif;
 }
 
 p {
     font-size: 1.25vw;
     line-height: 45px;
-    padding-bottom: 5%;
-    font-family: Georgia, 'Times New Roman', Times, serif
+    padding-bottom: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: white;
+    margin-bottom: 10vh;
 }
 
 mark {
