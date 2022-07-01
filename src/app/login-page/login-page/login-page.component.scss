@@ -4,7 +4,6 @@
     height: 30vh;
     margin-left: 11%;
     margin-top: 5%;
-
     background: #eceff1;
     padding: 48px;
     padding-bottom: 400px;
@@ -14,6 +13,7 @@
 .form-container mat-form-field {
     width: 100%;
     font-size: 200%;
+    padding-bottom: 0;
 }
 
 .center {
@@ -30,7 +30,7 @@
 }
 
 .sign-up-link {
-    font-size: 200%;
+    font-size: 150%;
     margin-left: 2%;
 }
 
