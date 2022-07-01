@@ -112,6 +112,10 @@
             <mat-error *ngIf="yearOfStudy?.hasError('required')">Year of study is required</mat-error>
         </mat-form-field>
 
+        <mat-form-field>
+            <input matInput placeholder="Faculty/Major" formControlName="major" name="major" />
+        </mat-form-field>
+
         <mat-form-field style="font-size: 2.5vh;">
             <input matInput placeholder="Japanese Proficiency (e.g. JLPT N1-5 etc.)" formControlName="japaneseProficiency" name="japaneseProficiency">
             <mat-error *ngIf="japaneseProficiency?.errors?.['required']">
