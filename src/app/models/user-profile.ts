@@ -16,6 +16,7 @@ export interface UserProfile {
     jobType?: string;
     interestedIndustry?: string;
     is_admin?: boolean;
+    applied_opportunities?: string[];
     // reason?: string;
     // expectation?: string;
     // standOut?: string;
