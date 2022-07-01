@@ -40,14 +40,32 @@ export class OpportunityDetailsComponent implements OnInit {
   }
 
   openAskDialog(): void {
+        if (this.authService.isLoggedIn) {
 
-    this.dialog.open(AskDialogComponent, {
-      data: {
-        functionHolder: () => { this.submitApplication
-      (); }
-      }
-      // width: '250px',
-    });
+      this.authService.isVerified().then(
+        (value)=> {
+          if (value) {
+            this.dialog.open(AskDialogComponent, {
+              data: {
+                functionHolder: () => { this.submitApplication
+              (); }
+              }
+              // width: '250px',
+            });
+          } else {
+            this.authService.openSnackBar("Your email is not verified yet!")
+            this.router.navigate(['/email_verification']);
+          }
+    
+        }
+      )
+
+    } else {
+      this.authService.openSnackBar("You are not logged in!")
+      this.dialog.closeAll();
+      this.router.navigate(['/login']);
+    }
+
   }
 
 
