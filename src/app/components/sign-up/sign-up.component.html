@@ -89,7 +89,6 @@
         </mat-error>
       </mat-form-field> -->
 
-
         <mat-form-field appearance="fill">
             <mat-label>Graduation Period</mat-label>
             <input matInput [matDatepicker]="picker1" formControlName="graduationPeriod" name="graduationPeriod">
@@ -111,69 +110,6 @@
                 <mat-option value="5">Year 5 or higher</mat-option>
             </mat-select>
             <mat-error *ngIf="yearOfStudy?.hasError('required')">Year of study is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-            <input matInput placeholder="Faculty/Major" formControlName="major" name="major" />
-        </mat-form-field>
-
-        <mat-form-field style="font-size: 2.5vh;">
-            <input matInput placeholder="Japanese Proficiency (e.g. JLPT N1-5 etc.)" formControlName="japaneseProficiency" name="japaneseProficiency">
-            <mat-error *ngIf="japaneseProficiency?.errors?.['required']">
-                Japanese Proficiency is required
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" style="font-size: 2vh;">
-            <mat-label>Where would you like to work in the future?</mat-label>
-            <mat-select formControlName="futureWorkplace" name="futureWorkplace" multiple>
-                <mat-option value="Japan">Japan</mat-option>
-                <mat-option value="America">America</mat-option>
-                <mat-option value="Singapore">Singapore</mat-option>
-                <mat-option value="etc.">Others</mat-option>
-            </mat-select>
-            <mat-error *ngIf="futureWorkplace?.hasError('required')">Future workplace is required.</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Graduation Period</mat-label>
-            <input matInput [matDatepicker]="picker1" formControlName="graduationPeriod" name="graduationPeriod">
-            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-            <mat-error *ngIf="graduationPeriod?.errors?.['required']">
-                Graduation Period is required.
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Year of study</mat-label>
-            <mat-select formControlName="yearOfStudy" name="yearOfStudy">
-                <mat-option value="1">Year 1</mat-option>
-                <mat-option value="2">Year 2</mat-option>
-                <mat-option value="3">Year 3</mat-option>
-                <mat-option value="4">Year 4</mat-option>
-                <mat-option value="5">Year 5 or higher</mat-option>
-            </mat-select>
-            <mat-error *ngIf="yearOfStudy?.hasError('required')">Year of study is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-            <mat-label>Industries you are interested in (Multiple choice)</mat-label>
-            <mat-select formControlName="industryField" name="industryField" multiple>
-                <mat-option value="consulting">Consulting</mat-option>
-                <mat-option value="manufacturing company">Manufacturing Company</mat-option>
-                <mat-option value="IT">IT</mat-option>
-                <mat-option value="food industry">Food Industry</mat-option>
-                <mat-option value="media">Media</mat-option>
-                <mat-option value="banking">Banking/Financial Industry</mat-option>
-                <mat-option value="real estate">Real Estate</mat-option>
-                <mat-option value="employment agency">Employment Agency</mat-option>
-                <mat-option value="advertising agency">Advertising Agency</mat-option>
-                <mat-option value="npo">NPO/NGO</mat-option>
-                <mat-option value="etc">Others</mat-option>
-            </mat-select>
-            <mat-error *ngIf="industryField?.hasError('required')">Please choose at least one</mat-error>
         </mat-form-field>
 
         <mat-form-field style="font-size: 2.5vh;">
