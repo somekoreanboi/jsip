@@ -174,7 +174,10 @@ public sendJobApplicationMail(companyName?: string,
   // Returns true if the email is verified
   async isVerified() {
     // const user = JSON.parse(localStorage.getItem('user')!);
-    const currentUser = await this.afAuth.currentUser;
+    let currentUser = await this.afAuth.currentUser;
+    await currentUser?.reload();
+    currentUser = await this.afAuth.currentUser;
+    console.log(currentUser?.emailVerified);
     return currentUser?.emailVerified;
   }
 
