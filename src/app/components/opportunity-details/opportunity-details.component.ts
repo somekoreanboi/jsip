@@ -1,21 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Company } from 'src/app/interfaces/company';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import {MatDialog} from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Router } from '@angular/router';
 import { AskDialogComponent } from '../ask-dialog/ask-dialog.component';
+import { Opportunity } from 'src/app/interfaces/opportunity';
 
 
 @Component({
-  selector: 'app-company-details',
-  templateUrl: './company-details.component.html',
-  styleUrls: ['./company-details.component.scss']
+  selector: 'app-opportunity-details',
+  templateUrl: './opportunity-details.component.html',
+  styleUrls: ['./opportunity-details.component.scss']
 })
 
-export class CompanyDetailsComponent implements OnInit {
+export class OpportunityDetailsComponent implements OnInit {
 
-  @Input() company!: Company
+  @Input() opportunity!: Opportunity
 
   constructor(public authService: AuthenticationService, public dialog: MatDialog, public router: Router) {}
 

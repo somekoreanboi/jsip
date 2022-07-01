@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Company } from '../../interfaces/company';
 import {MatDialog} from '@angular/material/dialog';
-import { CompanyDetailsComponent } from '../company-details/company-details.component';
+import { OpportunitiesDialogComponent } from '../opportunities-dialog/opportunities-dialog.component';
 
 @Component({
   selector: 'app-company-card',
@@ -12,8 +12,8 @@ export class CompanyCardComponent implements OnInit {
 
   @Input() company!: Company;
 
-  openCompanyDetails() {
-    let dialogRef = this.dialog.open(CompanyDetailsComponent);
+  openOpportunities() {
+    let dialogRef = this.dialog.open(OpportunitiesDialogComponent);
     let instance = dialogRef.componentInstance;
     instance.company = this.company;
   }

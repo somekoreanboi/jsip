@@ -30,7 +30,6 @@ import { MatSelectModule } from '@angular/material/select';
 
 
 
-import { CompanyDetailsComponent } from './components/company-details/company-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { JumbotronComponent } from './components/jumbotron/jumbotron.component';
 import { HotToastModule } from '@ngneat/hot-toast';
@@ -56,6 +55,8 @@ import { AskDialogComponent } from './components/ask-dialog/ask-dialog.component
 import { MY_DATE_FORMATS } from './models/my-date-formats';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ResetPasswordDialogComponent } from './components/reset-password-dialog/reset-password-dialog.component';
+import { OpportunitiesDialogComponent } from './components/opportunities-dialog/opportunities-dialog.component';
+import { OpportunityDetailsComponent } from './components/opportunity-details/opportunity-details.component';
 
 
 @NgModule({
@@ -68,7 +69,7 @@ import { ResetPasswordDialogComponent } from './components/reset-password-dialog
     PageNotFoundComponent,
     PictureGridComponent,
     CompanyCardComponent,
-    CompanyDetailsComponent,
+    OpportunityDetailsComponent,
     JumbotronComponent,
     LoginPageComponent,
     SignUpComponent,
@@ -78,6 +79,7 @@ import { ResetPasswordDialogComponent } from './components/reset-password-dialog
     AskDialogComponent,
     ForgotPasswordComponent,
     ResetPasswordDialogComponent,
+    OpportunitiesDialogComponent,
   ],
   imports: [
     BrowserModule,

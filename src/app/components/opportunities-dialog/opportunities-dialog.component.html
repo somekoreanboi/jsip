@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Job opportunities provided by the company</h1>
+<div mat-dialog-content>
+  <!-- My favorite animal is: -->
+  <mat-selection-list #shoes [multiple]="false">
+    <p *ngIf="company.opportunities?.length == 0 || company.opportunities?.length == null">
+        Sorry, but this company is currently not offering any opportunities.
+    </p>
+    <mat-list-item *ngFor="let opportunity of company.opportunities" (click)="openOpportunityDetail(opportunity)">
+      {{opportunity.position}}
+    </mat-list-item>
+  </mat-selection-list>
+</div>
