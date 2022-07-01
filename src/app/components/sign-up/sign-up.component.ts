@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewEncapsulation} from '@angular/core';
 import {Country} from '@angular-material-extensions/select-country'; 
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserProfile } from 'src/app/models/user-profile';
@@ -27,7 +27,8 @@ export function passwordsMatchValidator(): ValidatorFn {
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SignUpComponent implements OnInit {
 
