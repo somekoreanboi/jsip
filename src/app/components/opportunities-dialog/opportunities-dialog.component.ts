@@ -23,5 +23,8 @@ export class OpportunitiesDialogComponent implements OnInit {
     let dialogRef = this.dialog.open(OpportunityDetailsComponent);
     let instance  = dialogRef.componentInstance;
     instance.opportunity = opportunity;
+    instance.companyName = this.company.name;
+    instance.companyDescription = this.company.description;
+    instance.companyBusiness = this.company.description;
   }
 }

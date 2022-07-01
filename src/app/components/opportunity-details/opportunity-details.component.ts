@@ -15,7 +15,11 @@ import { Opportunity } from 'src/app/interfaces/opportunity';
 
 export class OpportunityDetailsComponent implements OnInit {
 
-  @Input() opportunity!: Opportunity
+  @Input() opportunity?: Opportunity
+  @Input() companyName?: string;
+  @Input() companyDescription?: string;
+  @Input() companyBusiness?: string;
+
 
   constructor(public authService: AuthenticationService, public dialog: MatDialog, public router: Router) {}
 
@@ -23,7 +27,8 @@ export class OpportunityDetailsComponent implements OnInit {
   }
 
   
-  openConfirmationDialog(): void {
+  submitApplication(): void {
+    this.authService.sendJobApplicationMail(this.companyName, this.companyDescription, this.companyBusiness, this.opportunity);
     this.dialog.open(ConfirmationDialogComponent, {
       // width: '250px',
     });
@@ -32,7 +37,8 @@ export class OpportunityDetailsComponent implements OnInit {
   openAskDialog(): void {
     this.dialog.open(AskDialogComponent, {
       data: {
-        functionHolder: () => { this.openConfirmationDialog(); }
+        functionHolder: () => { this.submitApplication
+      (); }
       }
       // width: '250px',
     });
@@ -41,23 +47,7 @@ export class OpportunityDetailsComponent implements OnInit {
 
 
   challenge() {
-    if (this.authService.isLoggedIn) {
-
-      this.authService.isVerified().then(
-        (value)=> {
-          if (value) {
-            this.openAskDialog();
-          } else {
-            window.alert("Your email is not verified yet!")
-            this.router.navigate(['/email_verification']);
-          }
-    
-        }
-      )
-
-    } else {
-      window.alert("You are not logged in!")
-    }
+    this.openAskDialog();
   }
 
 
