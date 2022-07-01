@@ -111,7 +111,7 @@ public sendJobApplicationMail(companyName?: string,
           } else {
             this.router.navigate(['/']);
             this.openSnackBar("Logged in successfully!");
-            this.isAdmin()
+            this.isAdmin;
           }
         });
 
@@ -178,6 +178,13 @@ public sendJobApplicationMail(companyName?: string,
     return currentUser?.emailVerified;
   }
 
+  get isAdmin(): boolean {
+    if (this.userData == null) {
+      return false;
+    }
+    return this.userData.is_admin!;
+  }
+
   // // Sign in with Google
   // GoogleAuth() {
   //   return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
@@ -239,21 +246,6 @@ public sendJobApplicationMail(companyName?: string,
     });
   }
 
-  isAdmin() {
-    const user_mail = this.userData?.email;
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user_mail}`
-    );
-    userRef.
-    ref
-    .get()
-    .then((doc) => {
-        if (doc.exists) {
-          console.log(doc.data().is_admin);
-        }
-      })
-  }
-
   GetUserData(email: string) {
     // const user_mail = JSON.parse(localStorage.getItem('user')!).email;
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -291,7 +283,8 @@ public sendJobApplicationMail(companyName?: string,
       futureWorkPlace: data.futureWorkPlace,
       jobType: data.jobType,
       interestedIndustry: data.interestedIndustry,
-      is_admin: data.is_admin,
+      is_admin: (data.is_admin == null) ? false : data.is_admin,
+      applied_opportunities: (data.applied_opportunities == null) ? [] : data.applied_opportunities,
     }
   }
 
@@ -307,10 +300,11 @@ public sendJobApplicationMail(companyName?: string,
         const opportunitiesCollection = companyCollection.doc(company_detail.id).collection("opportunities").get();
         opportunitiesCollection.forEach(opportunity => {
           opportunity.forEach(doc => {
-              let opportunity_data = doc.data();
+              let opportunity_data: Opportunity = doc.data();
               if (company.opportunities == null)  {
                 company.opportunities = [];
               }
+              opportunity_data.id = doc.id
               company.opportunities?.push(opportunity_data);
           })
       });
@@ -323,6 +317,30 @@ public sendJobApplicationMail(companyName?: string,
 
       console.log(companies);
       return companies;
+
+  }
+
+  async checkAndAddAppliedCompany(opportunity_id: string) {
+    if (this.userData?.applied_opportunities != null) {
+      if (this.userData.applied_opportunities.includes(opportunity_id)) {
+        this.openSnackBar("You already have applied!")
+        return false;
+      }
+    }
+
+    this.userData?.applied_opportunities?.push(opportunity_id);
+
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${this.userData!.email}`
+    );
+
+    return await userRef.set(this.userData, {
+      merge: true,
+    }).then(()=>{
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      return true;
+    });
+
 
   }
 

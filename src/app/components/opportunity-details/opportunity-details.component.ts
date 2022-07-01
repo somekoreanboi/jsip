@@ -28,13 +28,19 @@ export class OpportunityDetailsComponent implements OnInit {
 
   
   submitApplication(): void {
-    this.authService.sendJobApplicationMail(this.companyName, this.companyDescription, this.companyBusiness, this.opportunity);
-    this.dialog.open(ConfirmationDialogComponent, {
-      // width: '250px',
-    });
+    this.authService.checkAndAddAppliedCompany(this.opportunity?.id!)?.then(
+      (value)=> {
+        if (value) {
+          this.authService.sendJobApplicationMail(this.companyName, this.companyDescription, this.companyBusiness, this.opportunity);
+          this.dialog.open(ConfirmationDialogComponent, {
+          });
+        }
+      }
+    )
   }
 
   openAskDialog(): void {
+
     this.dialog.open(AskDialogComponent, {
       data: {
         functionHolder: () => { this.submitApplication
