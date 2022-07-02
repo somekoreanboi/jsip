@@ -493,6 +493,7 @@ public sendJobApplicationMail(companyName?: string,
         return userRef.ref.get().then((doc)=> {
           if (doc.exists) {
             userRef.delete().then(()=> {
+              localStorage.setItem('welcomed' + this.userData?.email, 'null');
               this.SignOut();
             })
           } else {
