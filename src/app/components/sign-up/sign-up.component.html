@@ -90,13 +90,13 @@
       </mat-form-field> -->
 
         <mat-form-field appearance="fill">
-            <mat-label>Graduation Period</mat-label>
+            <mat-label>Year Of Graduation</mat-label>
             <input matInput [matDatepicker]="picker1" formControlName="graduationPeriod" name="graduationPeriod">
             <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
             <mat-error *ngIf="graduationPeriod?.errors?.['required']">
-                Graduation Period is required.
+                Year Of Graduationis required.
             </mat-error>
         </mat-form-field>
 

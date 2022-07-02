@@ -32,6 +32,7 @@ export class OpportunityDetailsComponent implements OnInit {
       (value)=> {
         if (value) {
           this.authService.sendJobApplicationMail(this.companyName, this.companyDescription, this.companyBusiness, this.opportunity);
+          this.authService.sendAppliedMail(this.companyName!);
           this.dialog.open(ConfirmationDialogComponent, {
           });
         }

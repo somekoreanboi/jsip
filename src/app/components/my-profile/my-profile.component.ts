@@ -10,6 +10,8 @@ import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { ResetPasswordDialogComponent } from '../reset-password-dialog/reset-password-dialog.component';
+import { Router } from '@angular/router';
+import { AskDialogComponent } from '../ask-dialog/ask-dialog.component';
 
 @Component({
   selector: 'app-my-profile',
@@ -64,12 +66,32 @@ export class MyProfileComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, public authService: AuthenticationService,  public afs: AngularFirestore,
-    public dialog: MatDialog) {
+    public dialog: MatDialog, public router: Router) {
    }
 
   ngOnInit(): void {
     const userData = JSON.parse(localStorage.getItem('user')!);
     this.setData(userData);
+  }
+
+  deleteAccount() {
+    this.authService.deleteAccount()
+  }
+
+  openDeleteAccountAskDialog(){
+    if (this.authService.isLoggedIn) {
+      this.dialog.open(AskDialogComponent, {
+        data: {
+          functionHolder: () => { this.deleteAccount(); 
+          }
+        }
+        // width: '250px',
+      });
+    } else {
+      this.authService.openSnackBar("You are not logged in!")
+      this.dialog.closeAll();
+      this.router.navigate(['/login']);
+    }
   }
 
   setData(userData: any) {

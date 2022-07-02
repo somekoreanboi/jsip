@@ -1,0 +1,34 @@
+.form-container mat-form-field {
+    width: 100%;
+    font-size: 150%;
+    padding-bottom: 5%;
+}
+.checkbox mat-checkbox {
+    font-size: small;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.margin-top {
+    margin-top: 16px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.sign-up-link {
+    font-size: 200%;
+    margin-left: 2%;
+}
+
+.welcome {
+    font-size: 130%;
+}
+
+.buttons button {
+    margin: 10px;
+}

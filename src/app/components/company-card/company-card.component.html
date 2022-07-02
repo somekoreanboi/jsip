@@ -11,5 +11,9 @@
     </mat-card-content>
     <div style="text-align: center;">
         <button mat-button (click)="openOpportunities()" style="color: red; text-decoration: underline; font-family: 'Baskerville', serif;">Check Opportunities</button>
-    </div>
+        <br>
+        <button mat-raised-button (click)="openEditDialog()" *ngIf="this.authService.isAdmin" color="primary" style="margin-top: 14px;">Edit Company</button>
+        <br>
+        <button mat-raised-button (click)="openDeleteAskDialog()" *ngIf="this.authService.isAdmin" color="warn">Delete Company</button>
+        </div>
 </mat-card>

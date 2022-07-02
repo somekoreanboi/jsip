@@ -1,3 +1,10 @@
 mat-list-item:hover {
     cursor: pointer;
+    color: red;
+    text-decoration: underline;
+    text-decoration-color: red;
+}
+
+.opportunities {
+    text-decoration: underline;
 }

@@ -11,6 +11,9 @@ import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Company } from '../interfaces/company';
 import { Opportunity } from '../interfaces/opportunity';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
 
 
 @Injectable({
@@ -19,12 +22,20 @@ import { Opportunity } from '../interfaces/opportunity';
 export class AuthenticationService {
   userData?: UserProfile; // Save logged in user data
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      Authorization: 'my-auth-token'
+    })
+  };
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private _snackBar: MatSnackBar,
+    private http: HttpClient,
   ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
@@ -173,11 +184,19 @@ public sendJobApplicationMail(companyName?: string,
 
   // Returns true if the email is verified
   async isVerified() {
-    // const user = JSON.parse(localStorage.getItem('user')!);
+    const localUser = JSON.parse(localStorage.getItem('user')!);
     let currentUser = await this.afAuth.currentUser;
+    var beforeVerification = currentUser?.emailVerified && localUser.emailVerified;
     await currentUser?.reload();
     currentUser = await this.afAuth.currentUser;
-    return currentUser?.emailVerified;
+    var afterVerification = currentUser?.emailVerified;
+    // If the email is verified for the first time
+    if (!beforeVerification && afterVerification && localStorage.getItem('welcomed' + this.userData?.email) != 'true') {
+      this.sendWelcomeMail();
+      localStorage.setItem('welcomed' + this.userData?.email, 'true');
+    }
+    console.log(afterVerification);
+    return afterVerification;
   }
 
   get isAdmin(): boolean {
@@ -185,6 +204,64 @@ public sendJobApplicationMail(companyName?: string,
       return false;
     }
     return this.userData.is_admin!;
+  }
+
+  sendWelcomeMail() {
+    var 
+    mail = {
+    "to_address": this.userData?.email,
+    "subject": "Welcome to JSIP!",
+    "content": `Dear ${this.userData?.name},
+
+
+    A very warm welcome to JLink and thank you for signing up with us!
+    
+    Now, you will be able to apply to any companies listed on our website.
+    
+    Click the link below to find out what positions are available!
+    https://jap-link.com/companies
+    
+    Please remember to join our telegram channel so that you can receive the latest news updates for internship or job opportunities!
+    
+    Click the link below to join our telegram channel!
+    https://t.me/+3BPmT3QfhwU3Zjc1
+    
+    For any inquiry, please contact us at contact@jpsg-link.com
+    
+    Welcome to JLink again and we wish you all the best in your internship and job applications!
+    
+    Yours sincerely,
+    JLink Team`,
+
+  }
+  this.http.post('http://203.247.145.117:8000/send', mail).subscribe(val=>
+    {})
+}
+
+  sendAppliedMail(companyName: string) {
+      var 
+      mail = {
+      "to_address": this.userData?.email,
+      "subject": "[JLink] Your application has been received",
+      "content":  
+      `Dear ${this.userData?.name},
+
+      We have received your application for ${companyName} and it is currently being reviewed.
+  
+      Successful applicants will receive an email from the company in a few weeks.
+      
+      Rest assured that in the event of an unsuccessful application, an email will be sent out to inform you of the result. In the meantime, we seek your patience and understanding.
+      
+      For any inquiry, please contact us at contact@jpsg-link.com
+      
+      We wish you all the best in your application!
+      
+      Yours sincerely,
+      JLink Team`
+
+    }
+    this.http.post('http://203.247.145.117:8000/send', mail).subscribe(val=>
+      {})
   }
 
   // // Sign in with Google
@@ -343,7 +420,89 @@ public sendJobApplicationMail(companyName?: string,
       return true;
     });
 
+  }
 
+  addCompany(company: Company) {
+
+    const companyRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${company.name}`
+    );
+
+
+    return companyRef.ref.get().then((doc)=> {
+      if (doc.exists) {
+        throw new Error("This company exists already!");
+      }
+
+      companyRef.set(company, {
+        merge: true
+      })
+    }).then(()=> {
+      return true;
+    }).catch((error)=>window.alert(error.message));
+  }
+
+  deleteCompany(companyName: string) {
+
+    const companyRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${companyName}`
+    );
+
+
+    return companyRef.ref.get().then((doc)=> {
+      if (!doc.exists) {
+        this.openSnackBar("Error! This company doesn't exist!")
+        return false;
+      }
+
+      companyRef.delete().then(()=> {
+      return true;
+    }).catch((error)=>window.alert(error.message));
+    return false;
+  })
+
+  }
+
+  editCompany(company: Company) {
+
+    const companyRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${company.name}`
+    );
+
+
+    return companyRef.ref.get().then((doc)=> {
+      if (!doc.exists) {
+        this.openSnackBar("This company doesn't exist!")
+        return;
+      }
+
+      companyRef.set(company, {
+        merge: true
+      })
+    }).then(()=> {
+      return true;
+    }).catch((error)=>window.alert(error.message));
+  }
+
+  deleteAccount() {
+    this.afAuth.currentUser.then((currentUser)=> {
+      currentUser?.delete().then(()=> {
+        const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+          `users/${this.userData?.email}`
+        );
+        return userRef.ref.get().then((doc)=> {
+          if (doc.exists) {
+            userRef.delete().then(()=> {
+              this.SignOut();
+            })
+          } else {
+            window.alert("An error with deleting user data!")
+          }
+        }).catch(error=> {
+          window.alert(error);
+        })
+      })
+    })
   }
 
 }

@@ -1,6 +1,6 @@
 <!-- <mat-toolbar fxLayout="row" color=warn style="margin-left: 10%; margin-top: 10%;">
   <mat-toolbar-row #toolbarRow>
-    <a mat-button [routerLink]="['/']">JSIP</a> -->
+    <a mat-button [routerLink]="['/']">JLink</a> -->
 <!-- NOTE: use of $implicit below causes loop variable link to have a type of CustomLink -->
 <!-- <ng-template ngFor let-link="$implicit" [ngForOf]="links">
       <a
@@ -26,7 +26,7 @@
         <a [routerLink]="['/']">
             <img alt="HTML" src="assets/photos/jlink_logo.png" style="margin-left: 20%; width: 30%;">
         </a>
-        <!-- <strong *ngIf="authService.userData as user;" class="welcome">Welcome to JSIP, {{user.email}}!</strong> -->
+        <!-- <strong *ngIf="authService.userData as user;" class="welcome">Welcome to JLink, {{user.email}}!</strong> -->
     </div>
 
     <mat-toolbar id="navbar">
@@ -43,10 +43,18 @@
     <ng-container *ngIf="authService.userData as user; else loginButton">
 
      
+      <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/my_profile']" *ngIf="this.authService.isAdmin else userProfile">
+        <mat-icon>account_circle</mat-icon>
+      Admin Profile
+      </button>
+
+      <ng-template #userProfile>
       <button class="menus" mat-button routerLinkActive="active" [routerLink]="['/my_profile']">
         <mat-icon>account_circle</mat-icon>
       My Profile
       </button>
+    </ng-template>
+
 
       <button class="menus" mat-button (click)="logout()">
           <mat-icon>logout</mat-icon>
@@ -83,7 +91,10 @@
         <button mat-menu-item routerLink="/companies">Internship Opportunities</button>
         <!-- <button mat-menu-item routerLink="/contactus">Contact Us</button> -->
         <ng-container *ngIf="authService.userData as user; else sideLoginButton">
+          <button mat-menu-item routerLink="/my_profile" *ngIf="this.authService.isAdmin else userProfile;">Admin Profile</button>  
+          <ng-template #userProfile>
           <button mat-menu-item routerLink="/my_profile">My Profile</button>  
+          </ng-template>
           <button mat-menu-item (click)="logout()">Logout</button>
         </ng-container>
         <ng-template #sideLoginButton>

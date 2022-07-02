@@ -64,13 +64,13 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill" >
-        <mat-label>Graduation Period</mat-label>
+        <mat-label>Year Of Graduation</mat-label>
         <input matInput [matDatepicker]="picker1" formControlName="graduationPeriod" name="graduationPeriod">
         <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
         <mat-error *ngIf="graduationPeriod?.errors?.['required']">
-          Graduation Period is required.
+          Year Of Graduation is required.
         </mat-error>
       </mat-form-field>
 
@@ -152,8 +152,10 @@
       <button mat-raised-button color="primary" type="submit">
         Submit
       </button>  
- 
     </ng-template>
+    <button mat-raised-button (click)="openDeleteAccountAskDialog()" color="primary" type="button">
+      Delete My Account
+    </button>  
     </div>
     </form>
     </div>

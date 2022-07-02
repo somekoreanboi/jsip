@@ -2,11 +2,13 @@
 <div mat-dialog-content>
   <!-- My favorite animal is: -->
   <mat-selection-list #shoes [multiple]="false">
+    <div class="opportunities">
     <p *ngIf="company.opportunities?.length == 0 || company.opportunities?.length == null">
         Sorry, but this company is currently not offering any opportunities.
     </p>
     <mat-list-item *ngFor="let opportunity of company.opportunities" (click)="openOpportunityDetail(opportunity)">
       {{opportunity.position}}
     </mat-list-item>
+  </div>
   </mat-selection-list>
 </div>

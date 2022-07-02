@@ -57,6 +57,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ResetPasswordDialogComponent } from './components/reset-password-dialog/reset-password-dialog.component';
 import { OpportunitiesDialogComponent } from './components/opportunities-dialog/opportunities-dialog.component';
 import { OpportunityDetailsComponent } from './components/opportunity-details/opportunity-details.component';
+import { AddCompanyDialogComponent } from './components/add-company-dialog/add-company-dialog.component';
+import { EditCompanyDialogComponent } from './components/edit-company-dialog/edit-company-dialog.component';
 
 
 @NgModule({
@@ -80,6 +82,8 @@ import { OpportunityDetailsComponent } from './components/opportunity-details/op
     ForgotPasswordComponent,
     ResetPasswordDialogComponent,
     OpportunitiesDialogComponent,
+    AddCompanyDialogComponent,
+    EditCompanyDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,6 +112,7 @@ import { OpportunityDetailsComponent } from './components/opportunity-details/op
     AngularFireAnalyticsModule,
     AngularFirestoreModule,
     FormsModule,
+    HttpClientModule,
     
     
     
