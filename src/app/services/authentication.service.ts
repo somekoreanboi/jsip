@@ -499,7 +499,7 @@ public sendJobApplicationMail(companyName?: string,
             window.alert("An error with deleting user data!")
           }
         }).catch(error=> {
-          window.alert(error);
+          window.alert("Error! Try login again!");
         })
       })
     })
