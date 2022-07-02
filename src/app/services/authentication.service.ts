@@ -177,7 +177,6 @@ public sendJobApplicationMail(companyName?: string,
     let currentUser = await this.afAuth.currentUser;
     await currentUser?.reload();
     currentUser = await this.afAuth.currentUser;
-    console.log(currentUser?.emailVerified);
     return currentUser?.emailVerified;
   }
 

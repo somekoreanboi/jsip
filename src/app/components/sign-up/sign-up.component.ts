@@ -51,7 +51,7 @@ export class SignUpComponent implements OnInit {
     futureWorkplace: new FormControl('', [Validators.required]),
     industryField: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
-
+    pdpaConsent: new FormControl(false, [Validators.required, Validators.requiredTrue]),
 
 
   }, { validators: passwordsMatchValidator(), 
@@ -151,6 +151,10 @@ export class SignUpComponent implements OnInit {
 
   get nationality() {
     return this.signUpForm.get('nationality');
+  }
+
+  get pdpaConsent() {
+    return this.signUpForm.get('pdpaConsent');
   }
   
   convertMoment(date: any) {
