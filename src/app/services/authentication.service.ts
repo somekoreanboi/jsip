@@ -206,12 +206,14 @@ public sendJobApplicationMail(companyName?: string,
     return this.userData.is_admin!;
   }
 
-  sendWelcomeMail() {
-    var 
-    mail = {
-    "to_address": this.userData?.email,
-    "subject": "Welcome to JSIP!",
-    "content": `Dear ${this.userData?.name},
+
+sendWelcomeMail() {
+  var mail = {
+  to: this.userData?.email,
+  message: {
+    subject: "Welcome to JLink!",
+    text:
+    `Dear ${this.userData?.name},
 
 
     A very warm welcome to JLink and thank you for signing up with us!
@@ -232,37 +234,69 @@ public sendJobApplicationMail(companyName?: string,
     
     Yours sincerely,
     JLink Team`,
-
   }
-  this.http.post('http://203.247.145.117:8000/send', mail).subscribe(val=>
-    {})
+
 }
 
-  sendAppliedMail(companyName: string) {
-      var 
-      mail = {
-      "to_address": this.userData?.email,
-      "subject": "[JLink] Your application has been received",
-      "content":  
-      `Dear ${this.userData?.name},
+const mailRef: AngularFirestoreDocument<any> = this.afs.doc(
+  `mails/${this.userData?.email}`
+);
 
-      We have received your application for ${companyName} and it is currently being reviewed.
-  
-      Successful applicants will receive an email from the company in a few weeks.
-      
-      Rest assured that in the event of an unsuccessful application, an email will be sent out to inform you of the result. In the meantime, we seek your patience and understanding.
-      
-      For any inquiry, please contact us at contact@jpsg-link.com
-      
-      We wish you all the best in your application!
-      
-      Yours sincerely,
-      JLink Team`
-
-    }
-    this.http.post('http://203.247.145.117:8000/send', mail).subscribe(val=>
-      {})
+return mailRef.ref.get().then(doc=> {
+  if (doc.exists) {
+  } else {
+    mailRef.set(mail, {
+      merge: true
+    }).then(value=>{
+    })
   }
+})
+
+}
+
+  sendAppliedMail(companyName: string, opportunity_id: string) {
+    var mail = {
+    // to: this.userData?.email,
+    to: "info@jpsg-link.com",
+    message: {
+      subject: "[JLink] Your application has been received",
+      text:
+      `Dear ${this.userData?.name},
+      
+
+    We have received your application for ${companyName} and it is currently being reviewed.
+
+    Successful applicants will receive an email from the company in a few weeks.
+    
+    Rest assured that in the event of an unsuccessful application, an email will be sent out to inform you of the result. In the meantime, we seek your patience and understanding.
+    
+    For any inquiry, please contact us at contact@jpsg-link.com
+    
+    We wish you all the best in your application!
+    
+    Yours sincerely,
+    JLink Team`,
+    }
+
+  }
+
+  const mailRef: AngularFirestoreDocument<any> = this.afs.doc(
+    `mails/${this.userData?.email}${opportunity_id}`
+  );
+
+  return mailRef.ref.get().then(doc=> {
+    if (doc.exists) {
+      throw new Error("You have applied already!")
+    } else {
+      mailRef.set(mail, {
+        merge: true
+      }).then(value=>{
+      })
+    }
+  })
+
+  }
+  
 
   // // Sign in with Google
   // GoogleAuth() {
