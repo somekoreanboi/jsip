@@ -28,11 +28,11 @@ export class OpportunityDetailsComponent implements OnInit {
 
   
   submitApplication(): void {
-    this.authService.checkAndAddAppliedCompany(this.opportunity?.id!)?.then(
+    this.authService.checkAndAddAppliedCompany(this.opportunity?.position!)?.then(
       (value)=> {
         if (value) {
           this.authService.sendJobApplicationMail(this.companyName, this.companyDescription, this.companyBusiness, this.opportunity);
-          this.authService.sendAppliedMail(this.companyName!, this.opportunity?.id!).then(()=> {
+          this.authService.sendAppliedMail(this.companyName!, this.opportunity?.position!).then(()=> {
             this.dialog.open(ConfirmationDialogComponent, {
             });
           })

@@ -239,7 +239,7 @@ sendWelcomeMail() {
 }
 
 const mailRef: AngularFirestoreDocument<any> = this.afs.doc(
-  `mails/${this.userData?.email}`
+  `mails/${this.userData?.email}welcomed`
 );
 
 return mailRef.ref.get().then(doc=> {
@@ -417,7 +417,6 @@ return mailRef.ref.get().then(doc=> {
               if (company.opportunities == null)  {
                 company.opportunities = [];
               }
-              opportunity_data.id = doc.id
               company.opportunities?.push(opportunity_data);
           })
       });
@@ -430,6 +429,97 @@ return mailRef.ref.get().then(doc=> {
 
       console.log(companies);
       return companies;
+
+  }
+
+  
+  getOpportunityDetail(companyName: string, opportunityPosition: string) {
+    var opportunityRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${companyName}/opportunities/${opportunityPosition}`
+    );
+
+    return opportunityRef.ref.get().then(doc=> {
+      if (!doc.exists) {
+        throw new Error("The opportunity data doesn't exist!");
+      } else {
+        return doc.data();
+      }
+    })
+  }
+
+  GetOpportunities(companyName: string) {
+    var companyRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${companyName}`
+    );
+    var opportunities: Opportunity[] = [];
+
+    companyRef.ref.get().then(doc=> {
+      if (!doc.exists) {
+        throw new Error("The company data doesn't exist!");
+      }
+    })
+
+    const opportunityCollection = companyRef.collection('opportunities');
+    return opportunityCollection.ref.get().then((collection)=> {
+      collection.forEach(opportunity=> {
+        opportunities.push(opportunity.data());
+      })
+    }).then(()=> {
+      console.log(opportunities);
+      return opportunities;
+    })
+  }
+
+  deleteOpportunity(companyName: string, opportunityPosition: string) {
+    var opportunityRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${companyName}/opportunities/${opportunityPosition}`
+    );
+
+    return opportunityRef.ref.get().then(doc=> {
+      if (!doc.exists) {
+        throw new Error("The opportunity data doesn't exist!");
+      } else {
+        return opportunityRef.delete();
+      }
+    })
+
+  }
+
+  editOpportunity(companyName: string, opportunity: Opportunity) {
+    var opportunityRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${companyName}/opportunities/${opportunity.position}`
+    );
+
+    return opportunityRef.ref.get().then(doc=> {
+      if (!doc.exists) {
+        throw new Error("The opportunity data doesn't exist!");
+      } else {
+        return opportunityRef.set(opportunity, {
+          merge: true,
+        }).then(()=> {
+          return true;
+        })
+      }
+    })
+
+  }
+
+  addOpportunity(companyName: string, opportunity: Opportunity) {
+    var opportunityRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `companies/${companyName}/opportunities/${opportunity.position}`
+    );
+
+    return opportunityRef.ref.get().then(doc=> {
+      if (doc.exists) {
+        throw new Error("The opportunity data exists already!");
+      } else {
+        return opportunityRef.set(opportunity, {
+          merge: true,
+        }).then(()=> {
+          return true;
+        })
+      }
+    })
 
   }
 

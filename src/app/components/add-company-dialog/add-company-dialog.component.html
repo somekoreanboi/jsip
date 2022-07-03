@@ -11,7 +11,8 @@
         </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Description" formControlName="description" name="description"/>
+        <textarea matInput placeholder="Description" formControlName="description" name="description">
+        </textarea>
         <mat-error *ngIf="description?.errors?.['required']">
           Company description is required
         </mat-error>
@@ -32,7 +33,8 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Business of the company" formControlName="ourBusiness" name="ourBusiness"/>
+        <textarea matInput placeholder="Business of the company" formControlName="ourBusiness" name="ourBusiness">
+        </textarea>
         <mat-error *ngIf="ourBusiness?.errors?.['required']">
           Business of the company is required
         </mat-error>

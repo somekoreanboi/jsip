@@ -6,6 +6,4 @@ export interface Opportunity {
     monthly_salary?: string;
     working_location?: string;
     other?: string;   
-    id?: string;
-
 }

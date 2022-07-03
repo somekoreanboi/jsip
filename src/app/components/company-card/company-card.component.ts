@@ -19,7 +19,8 @@ export class CompanyCardComponent implements OnInit {
 
   openOpportunities() {
 
-    let dialogRef = this.dialog.open(OpportunitiesDialogComponent);
+    let dialogRef = this.dialog.open(OpportunitiesDialogComponent, {
+    });
     let instance = dialogRef.componentInstance;
     instance.company = this.company;
     
@@ -73,7 +74,7 @@ export class CompanyCardComponent implements OnInit {
 
 openEditDialog(): void {
   let dialogRef = this.dialog.open(EditCompanyDialogComponent, {
-   data: { 
+    data: { 
      company: this.company,
      functionHolder: () => { this.refreshCompanies(); }
     }

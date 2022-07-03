@@ -2,13 +2,18 @@
 <div mat-dialog-content>
   <!-- My favorite animal is: -->
   <mat-selection-list #shoes [multiple]="false">
-    <div class="opportunities">
+    <div>
     <p *ngIf="company.opportunities?.length == 0 || company.opportunities?.length == null">
         Sorry, but this company is currently not offering any opportunities.
     </p>
     <mat-list-item *ngFor="let opportunity of company.opportunities" (click)="openOpportunityDetail(opportunity)">
+      <div class="opportunities">
       {{opportunity.position}}
+    </div>
+      <button mat-raised-button (click)="openEditDialog(opportunity.position!)" *ngIf="this.authService.isAdmin" color="primary">Edit Opportunity</button>
+      <button mat-raised-button (click)="openDeleteAskDialog(company.name!, opportunity.position!)" *ngIf="this.authService.isAdmin" color="warn">Delete Opportunity</button>
     </mat-list-item>
   </div>
   </mat-selection-list>
+  <button mat-raised-button (click)="openAddOpportunityDialog()" *ngIf="this.authService.isAdmin" color="accent">Add Opportunity</button>
 </div>

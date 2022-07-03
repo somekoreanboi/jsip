@@ -59,6 +59,8 @@ import { OpportunitiesDialogComponent } from './components/opportunities-dialog/
 import { OpportunityDetailsComponent } from './components/opportunity-details/opportunity-details.component';
 import { AddCompanyDialogComponent } from './components/add-company-dialog/add-company-dialog.component';
 import { EditCompanyDialogComponent } from './components/edit-company-dialog/edit-company-dialog.component';
+import { AddOpportunityDialogComponent } from './components/add-opportunity-dialog/add-opportunity-dialog.component';
+import { EditOpportunityDialogComponent } from './components/edit-opportunity-dialog/edit-opportunity-dialog.component';
 
 
 @NgModule({
@@ -84,6 +86,8 @@ import { EditCompanyDialogComponent } from './components/edit-company-dialog/edi
     OpportunitiesDialogComponent,
     AddCompanyDialogComponent,
     EditCompanyDialogComponent,
+    AddOpportunityDialogComponent,
+    EditOpportunityDialogComponent,
   ],
   imports: [
     BrowserModule,
