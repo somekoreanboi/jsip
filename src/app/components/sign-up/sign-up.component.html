@@ -180,16 +180,16 @@
       <mat-form-field style="font-size: 1.5vh;">
         <input matInput placeholder="What makes you stand out? (Skills, Certificate, Experience etc)" formControlName="standOut" name="standOut"/>
       </mat-form-field> -->
-  
+
         <mat-checkbox formControlName="pdpaConsent" name="pdpaConsent" required>
-            By ticking this box, I agree and consent to 
-            <a href = "https://www.docdroid.net/file/download/7MieUoo/jlink-pdpa-pdf.pdf" target="_blank"> PDPA </a> 
+            By ticking this box, I agree and consent to
+            <a href="https://www.docdroid.net/file/download/7MieUoo/jlink-pdpa-pdf.pdf" target="_blank"> PDPA </a>
         </mat-checkbox>
         <mat-error *ngIf="pdpaConsent?.hasError('required')">You must agree with PDPA to sign up!</mat-error>
-       
+
 
         <div class="center margin-top">
-            <button mat-raised-button color="primary" type="submit">
+            <button mat-raised-button type="submit">
         Sign up
       </button>
         </div>

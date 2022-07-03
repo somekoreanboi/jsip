@@ -7,7 +7,7 @@
     margin-top: 5%;
     margin-bottom: 5%;
     margin-right: 13vw;
-    background: #eceff1;
+    background: white;
     padding: 48px;
     border-radius: 16px;
 }
@@ -23,7 +23,6 @@
     font-size: 150%;
     padding-bottom: 5%;
 }
-
 
 .form-container mat-select-country {
     width: 100%;
@@ -45,8 +44,8 @@
     padding-bottom: 5%;
 }
 
-.checkbox mat-checkbox {
-    font-size: small;
+mat-checkbox {
+    font-size: 150%;
 }
 
 .center {
