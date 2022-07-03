@@ -113,11 +113,6 @@ export class MyProfileComponent implements OnInit {
     })
   }
 
-
-  onCountrySelected($event: Country) {
-    console.log($event);
-  }
-
   get name() {
     return this.signUpForm.get('name');
   }
@@ -215,7 +210,6 @@ export class MyProfileComponent implements OnInit {
     };
 
     
-    console.log(userData);
 
     if (this.signUpForm.valid) {
       this.authService.SetUserData(userData).then(() => {

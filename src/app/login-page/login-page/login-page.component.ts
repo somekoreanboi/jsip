@@ -39,11 +39,9 @@ export class LoginPageComponent implements OnInit {
 
 
     const {email, password} = this.loginForm.value;
-    console.log(email, password);
     if (this.loginForm.valid) {
       this.authService.SignIn(email, password);
     } else {
-      console.log('error');
     }
 
     

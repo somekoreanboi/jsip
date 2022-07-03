@@ -51,7 +51,6 @@ export class EditCompanyDialogComponent implements OnInit {
   
   editCompany() {
     const newCompany: Company = this.makeCompany();
-    console.log(newCompany);
     if (this.editCompanyForm.valid) {
       this.authService.editCompany(newCompany).then((value)=> {
         if (value) {

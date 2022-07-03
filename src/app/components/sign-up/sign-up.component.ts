@@ -76,11 +76,6 @@ export class SignUpComponent implements OnInit {
 
   }
 
-
-  onCountrySelected($event: Country) {
-    console.log($event);
-  }
-
   get name() {
     return this.signUpForm.get('name');
   }

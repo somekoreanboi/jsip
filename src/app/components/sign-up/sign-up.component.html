@@ -40,7 +40,7 @@
             </mat-error>
         </div>
 
-        <mat-select-country appearance="outline" style="width: 300%;" label="Nationality" formControlName="nationality" name="nationality" (onCountrySelected)="onCountrySelected($event)" loadingDB="true" [value]="defaultNationality">
+        <mat-select-country appearance="outline" style="width: 300%;" label="Nationality" formControlName="nationality" name="nationality" loadingDB="true" [value]="defaultNationality">
         </mat-select-country>
         <mat-error *ngIf="nationality?.errors?.['required']">
             Nationality is required.

@@ -42,7 +42,6 @@ export class AuthenticationService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.GetUserData(user.email!).then(()=>{
-          console.log((this.userData));
           localStorage.setItem('user', JSON.stringify(this.userData));
         }); 
       } else {
@@ -176,7 +175,6 @@ public sendJobApplicationMail(companyName?: string,
 
   // Returns true when user is looged in
   get isLoggedIn(): boolean {
-    console.log(localStorage.getItem('user')!);
     const user = JSON.parse(localStorage.getItem('user')!);
     // return user !== null && user.emailVerified !== false ? true : false;
     return user !== null ? true : false;
@@ -195,7 +193,6 @@ public sendJobApplicationMail(companyName?: string,
       this.sendWelcomeMail();
       localStorage.setItem('welcomed' + this.userData?.email, 'true');
     }
-    console.log(afterVerification);
     return afterVerification;
   }
 
@@ -372,7 +369,6 @@ return mailRef.ref.get().then(doc=> {
           const data = doc.data();
           const userData = this.parseUser(data);
           this.userData = userData;
-          console.log(this.userData);
         } else {
             window.alert("Error while loading user data!")
         }
@@ -427,7 +423,6 @@ return mailRef.ref.get().then(doc=> {
         window.alert(error.message);
       })
 
-      console.log(companies);
       return companies;
 
   }
@@ -465,7 +460,6 @@ return mailRef.ref.get().then(doc=> {
         opportunities.push(opportunity.data());
       })
     }).then(()=> {
-      console.log(opportunities);
       return opportunities;
     })
   }
