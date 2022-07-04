@@ -189,7 +189,7 @@ public sendJobApplicationMail(companyName?: string,
     currentUser = await this.afAuth.currentUser;
     var afterVerification = currentUser?.emailVerified;
     // If the email is verified for the first time
-    if (!beforeVerification && afterVerification && localStorage.getItem('welcomed' + this.userData?.email) != 'true') {
+    if (afterVerification) {
       this.sendWelcomeMail();
       localStorage.setItem('welcomed' + this.userData?.email, 'true');
     }
@@ -210,9 +210,8 @@ sendWelcomeMail() {
   message: {
     subject: "Welcome to JLink!",
     text:
-    `Dear ${this.userData?.name},
-
-
+   `
+    Dear ${this.userData?.name},
     A very warm welcome to JLink and thank you for signing up with us!
     
     Now, you will be able to apply to any companies listed on our website.
@@ -236,7 +235,7 @@ sendWelcomeMail() {
 }
 
 const mailRef: AngularFirestoreDocument<any> = this.afs.doc(
-  `mails/${this.userData?.email}welcomed`
+  `mails/${this.userData?.email} welcomed`
 );
 
 return mailRef.ref.get().then(doc=> {
@@ -253,8 +252,8 @@ return mailRef.ref.get().then(doc=> {
 
   sendAppliedMail(companyName: string, opportunity_id: string) {
     var mail = {
-    // to: this.userData?.email,
-    to: "info@jpsg-link.com",
+    to: this.userData?.email,
+    // to: "info@jpsg-link.com",
     message: {
       subject: "[JLink] Your application has been received",
       text:
