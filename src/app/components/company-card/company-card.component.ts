@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Company } from '../../interfaces/company';
 import {MatDialog} from '@angular/material/dialog';
 import { OpportunitiesDialogComponent } from '../opportunities-dialog/opportunities-dialog.component';
@@ -11,6 +11,7 @@ import { EditCompanyDialogComponent } from '../edit-company-dialog/edit-company-
   selector: 'app-company-card',
   templateUrl: './company-card.component.html',
   styleUrls: ['./company-card.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CompanyCardComponent implements OnInit {
 

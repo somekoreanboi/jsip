@@ -1,6 +1,6 @@
-<mat-card>
-        <mat-card-title>  
-            <p><img src="{{company.img}}" alt="Image not supported!" > {{company.name}}</p>
+<mat-card fxFlex class="mat-elevation-z4">
+       <mat-card-title>  
+            <p><img src="{{company.img}}" alt="" > {{company.name}}</p>
         </mat-card-title>
         <mat-card-subtitle>	
             Research Analyst Internship/Marketing Internship
@@ -16,8 +16,9 @@
     <mat-card-actions>
         <button mat-button id="check" (click)="openOpportunities()">Check Opportunities ▷</button>
         <ng-container *ngIf="this.authService.isAdmin">
-        <button mat-raised-button (click)="openEditDialog()" color="primary" style="margin-top: 14px;">Edit Company</button>
+        <button mat-raised-button (click)="openEditDialog()" color="primary">Edit Company</button>
         <button mat-raised-button (click)="openDeleteAskDialog()" color="warn">Delete Company</button>
         </ng-container>
-        </mat-card-actions>
+    </mat-card-actions>
 </mat-card>
+

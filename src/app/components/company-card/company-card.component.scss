@@ -1,14 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Finlandica:ital@1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Finlandica:ital@1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Finlandica:ital@1&display=swap');
+:host {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    
+   }
 
 mat-card {
-    min-width: 42vw;
-    margin-bottom: 5vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-color: black;
+    border-width: thick;
+    border-radius: 4px;
+    position: relative;
 }
 
 mat-card-title {
     text-align: center;
+}
+
+mat-card-title p {
+    height:50px;
+    width: auto;
+}
+
+mat-card-title p img {
+    height:50px;
+    width: auto;
 }
 
 mat-card-subtitle {
@@ -16,6 +34,16 @@ mat-card-subtitle {
     font-size: large;
     font-weight: bold;
     font-family: 'Finlandica', sans-serif;
+}
+
+mat-card-actions {
+    text-align: center;
+    display: inline-block;
+}
+
+
+mat-card-content {
+    display: flex;
 }
 
 .slogan {
@@ -28,33 +56,17 @@ mat-card-subtitle {
 .description {
     text-align: center;
     font-family: 'Finlandica', sans-serif;
+    height: 100px;
 }
 
-img {
-    height: auto;
-    width: 10%;
-    margin: auto;
-}
 
 img:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
 
-.mat-card-title {
-    font-size: 200%;
-    font-weight: bold;
-    margin-top: 20px;
-}
 
-.mat-card-content {
-    flex-grow: 1;
-    overflow: auto;
-}
 
-mat-card-actions {
-    text-align: center;
-}
 
 #check {
     color: red; 

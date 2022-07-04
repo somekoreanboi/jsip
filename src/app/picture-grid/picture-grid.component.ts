@@ -14,11 +14,6 @@ export class PictureGridComponent implements OnInit {
 
   companies?: Company[];
 
-  gridColumns = 2;
-
-// toggleGridColumns() {
-//   this.gridColumns = this.gridColumns === 3 ? 4 : 3;
-// }
 
 openCompanyAddDialog() {
   this.matDialog.open(AddCompanyDialogComponent, {
