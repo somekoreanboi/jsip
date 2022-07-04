@@ -6,6 +6,6 @@ export interface Company {
     company_link?: string;
     img: string;
     ourBusiness?: string; 
+    slogan?: string;
     opportunities?: Opportunity[];
-    
 }

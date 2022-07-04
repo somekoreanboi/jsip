@@ -1,19 +1,23 @@
-<mat-card class="mat-elevation-z4" style="font-family: 'Baskerville', serif;">
-    <img (click)="goToLink()" mat-card-image src="{{company.img}}">
-    <div style="text-align:center;">
-        <mat-card-title>{{company.name}}</mat-card-title>
-    </div>
-    <br>
+<mat-card>
+        <mat-card-title>  
+            <p><img src="{{company.img}}" alt="Image not supported!" > {{company.name}}</p>
+        </mat-card-title>
+        <mat-card-subtitle>	
+            Research Analyst Internship/Marketing Internship
+        </mat-card-subtitle>
     <mat-card-content>
-        <p>
-            {{company.description}}
-        </p>
-    </mat-card-content>
-    <div style="text-align: center;">
-        <button mat-button (click)="openOpportunities()" style="color: red; text-decoration: underline; font-family: 'Baskerville', serif;">Check Opportunities</button>
-        <br>
-        <button mat-raised-button (click)="openEditDialog()" *ngIf="this.authService.isAdmin" color="primary" style="margin-top: 14px;">Edit Company</button>
-        <br>
-        <button mat-raised-button (click)="openDeleteAskDialog()" *ngIf="this.authService.isAdmin" color="warn">Delete Company</button>
+        <div class="slogan">
+        "{{company.slogan}}"        
         </div>
+        <div class="description">
+            {{company.description}}
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button id="check" (click)="openOpportunities()">Check Opportunities ▷</button>
+        <ng-container *ngIf="this.authService.isAdmin">
+        <button mat-raised-button (click)="openEditDialog()" color="primary" style="margin-top: 14px;">Edit Company</button>
+        <button mat-raised-button (click)="openDeleteAskDialog()" color="warn">Delete Company</button>
+        </ng-container>
+        </mat-card-actions>
 </mat-card>

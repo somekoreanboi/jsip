@@ -16,7 +16,8 @@ export class AddCompanyDialogComponent implements OnInit {
     description: new FormControl('', Validators.required),
     company_link: new FormControl('', Validators.required),
     img: new FormControl('', Validators.required),
-    ourBusiness: new FormControl('', Validators.required),
+    ourBusiness: new FormControl(''),
+    slogan: new FormControl(''),
   },)
 
   constructor(public authService: AuthenticationService, @Inject(MAT_DIALOG_DATA) data: { functionHolder: Function }) {
@@ -35,6 +36,7 @@ export class AddCompanyDialogComponent implements OnInit {
       company_link: this.company_link?.value,
       img: this.img?.value,
       ourBusiness: this.ourBusiness?.value, 
+      slogan: this.slogan?.value,
     }
     return company;
 
@@ -74,6 +76,10 @@ get img() {
 
 get ourBusiness() {
   return this.addCompanyForm.get('ourBusiness');
+}
+
+get slogan() {
+  return this.addCompanyForm.get('slogan');
 }
 
 }

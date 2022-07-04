@@ -1,9 +1,9 @@
-<button (click)="openCompanyAddDialog()" *ngIf="this.authService.isAdmin" color="warn">Add a new company</button>
-<div class="content">
-    <div fxLayout="row wrap" fxLayoutGap="10px grid">
-        <div class=card-container [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let company of companies">
-            <app-company-card [refreshCompanies]="this.getCompanies.bind(this)"  [company]="company"></app-company-card>
-        </div>
-    </div>
-</div>
+<ng-container *ngIf="this.authService.isAdmin">
+<button (click)="openCompanyAddDialog()" color="warn">Add a new company</button>
+</ng-container>
 
+<div fxLayout="row wrap">
+<ng-container *ngFor="let company of companies">
+<app-company-card fxFlex="42%" fxFlex.xs="100%" fxFlex.sm="33%"  [refreshCompanies]="this.getCompanies.bind(this)"  [company]="company"></app-company-card>
+</ng-container>
+</div>
