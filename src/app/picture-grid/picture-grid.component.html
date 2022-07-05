@@ -1,9 +1,9 @@
 <ng-container *ngIf="this.authService.isAdmin">
-<button (click)="openCompanyAddDialog()" color="warn">Add a new company</button>
+    <button (click)="openCompanyAddDialog()" color="warn">Add a new company</button>
 </ng-container>
 
-<div class="container" fxLayout="row wrap" fxLayoutGap="3vh grid" fxLayoutAlign="space-between stretch" fxFlexFill>  
-<div fxFlex="48"  fxFlex.xs="90" fxFlex.sm="90" *ngFor="let company of companies">
-<app-company-card [refreshCompanies]="this.getCompanies.bind(this)"  [company]="company"></app-company-card>
-</div>
+<div class="container" fxLayout="row wrap" fxLayoutGap="3vh grid" fxLayoutAlign="space-between stretch" fxFlexFill>
+    <div fxFlex="50" fxFlex.xs="90" fxFlex.sm="90" *ngFor="let company of companies">
+        <app-company-card [refreshCompanies]="this.getCompanies.bind(this)" [company]="company"></app-company-card>
+    </div>
 </div>
