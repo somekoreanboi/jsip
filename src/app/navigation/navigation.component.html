@@ -64,7 +64,7 @@
     <!-- Side menu bar for mobile -->
     <mat-menu x-position="before" #menu>
         <button mat-menu-item routerLink="/home">Home</button>
-        <button mat-menu-item routerLink="/aboutus">About Us</button>
+        <button mat-menu-item routerLink="/about">About Us</button>
         <button mat-menu-item routerLink="/companies">Internship Opportunities</button>
         <!-- <button mat-menu-item routerLink="/contactus">Contact Us</button> -->
         <ng-container *ngIf="authService.userData as user; else sideLoginButton">
