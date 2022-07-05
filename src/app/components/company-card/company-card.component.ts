@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { AskDialogComponent } from '../ask-dialog/ask-dialog.component';
 import { EditCompanyDialogComponent } from '../edit-company-dialog/edit-company-dialog.component';
+import { auto } from '@popperjs/core';
 
 @Component({
   selector: 'app-company-card',
@@ -55,6 +56,17 @@ export class CompanyCardComponent implements OnInit {
   constructor(public dialog: MatDialog, public authService: AuthenticationService, public router: Router) {}
 
   ngOnInit(): void {
+  } 
+
+  parseSubtitle() {
+    let positions: String[] = [];
+    if (this.company?.opportunities == null) {
+      return "No position available currently"
+    }
+    for (let opportunity of this.company.opportunities!) {
+      positions.push(opportunity.position!);
+    }
+    return (this.company.opportunities?.length == 1) ?positions[0] :positions.join("/")
   }
 
   deleteCompany(companyName: string) {

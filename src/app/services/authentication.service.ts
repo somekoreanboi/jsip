@@ -80,7 +80,7 @@ export class AuthenticationService {
 }
 
 public sendJobApplicationMail(companyName?: string,
-  companyDescription?: string, companybusiness?: string, opportunity?: Opportunity) {
+  companyProfile?: string, companybusiness?: string, opportunity?: Opportunity) {
   emailjs.send("service_14f2b2e","template_3p1n6is",{
     name: this.userData?.name,
     email: this.userData?.email,
@@ -96,7 +96,7 @@ public sendJobApplicationMail(companyName?: string,
     jobType: this.userData?.jobType,
     interestedIndustry: this.userData?.interestedIndustry,
     company_name: companyName,
-    company_description: companyDescription,
+    company_description: companyProfile,
     company_business: companybusiness,
     job_overview: opportunity?.job_overview,
     qualifications: opportunity?.qualifications,
