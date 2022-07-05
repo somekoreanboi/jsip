@@ -17,10 +17,10 @@ export class EditCompanyDialogComponent implements OnInit {
 
   editCompanyForm = new FormGroup({
     name: new FormControl('', Validators.required,),
-    description: new FormControl('', Validators.required),
+    profile: new FormControl('', Validators.required),
     company_link: new FormControl('', Validators.required),
     img: new FormControl('', Validators.required),
-    ourBusiness: new FormControl('', Validators.required),
+    application_headline: new FormControl('', Validators.required),
   },)
 
   constructor(public authService: AuthenticationService, @Inject(MAT_DIALOG_DATA) data: { functionHolder: Function }) {
@@ -30,19 +30,17 @@ export class EditCompanyDialogComponent implements OnInit {
   ngOnInit(): void {
     this.name?.setValue(this.company.name);
     this.name?.disable();
-    this.description?.setValue(this.company.description);
+    this.profile?.setValue(this.company.profile);
     this.company_link?.setValue(this.company.company_link);
     this.img?.setValue(this.company.img);
-    this.ourBusiness?.setValue(this.company.ourBusiness); 
   }
 
   makeCompany():Company { 
     const company: Company = {
       name: this.name?.value,
-      description: this.description?.value,
+      profile: this.profile?.value,
       company_link: this.company_link?.value,
       img: this.img?.value,
-      ourBusiness: this.ourBusiness?.value, 
     }
     return company;
 
@@ -68,8 +66,8 @@ get name() {
   return this.editCompanyForm.get('name');
 }
 
-get description() {
-  return this.editCompanyForm.get('description');
+get profile() {
+  return this.editCompanyForm.get('profile');
 }
 
 get company_link() {
@@ -80,8 +78,10 @@ get img() {
   return this.editCompanyForm.get('img');
 }
 
-get ourBusiness() {
-  return this.editCompanyForm.get('ourBusiness');
+get application_headline() {
+  return this.editCompanyForm.get('application_headline');
 }
+
+
 
 }

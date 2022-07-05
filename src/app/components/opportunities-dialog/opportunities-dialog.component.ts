@@ -28,8 +28,7 @@ export class OpportunitiesDialogComponent implements OnInit {
     let instance  = dialogRef.componentInstance;
     instance.opportunity = opportunity;
     instance.companyName = this.company.name;
-    instance.companyDescription = this.company.description;
-    instance.companyBusiness = this.company.description;
+    instance.companyProfile = this.company.profile;
   }
 
   openEditDialog(opportunityPosition: string) {

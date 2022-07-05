@@ -23,7 +23,6 @@ export class EditOpportunityDialogComponent implements OnInit {
   period: new FormControl('', Validators.required),
   monthly_salary: new FormControl('', Validators.required),
   working_location: new FormControl('', Validators.required),
-  other: new FormControl(''),
   },);
 
 
@@ -42,7 +41,6 @@ export class EditOpportunityDialogComponent implements OnInit {
         this.period?.setValue(value.period);
         this.monthly_salary?.setValue(value.monthly_salary);
         this.working_location?.setValue(value.working_location);
-        this.other?.setValue(value.other)
       }
     )
   }
@@ -57,7 +55,6 @@ export class EditOpportunityDialogComponent implements OnInit {
       period: this.period?.value,
       monthly_salary: this.monthly_salary?.value,
       working_location: this.working_location?.value,
-      other: this.other?.value,
     }
     return opportunity;
   }
@@ -99,9 +96,4 @@ export class EditOpportunityDialogComponent implements OnInit {
   get working_location() {
     return this.editOpportunityForm.get('working_location');
   }
-
-  get other() {
-    return this.editOpportunityForm.get('other');
-  }
-
 }

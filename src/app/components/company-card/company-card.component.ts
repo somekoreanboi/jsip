@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Company } from '../../interfaces/company';
 import {MatDialog} from '@angular/material/dialog';
 import { OpportunitiesDialogComponent } from '../opportunities-dialog/opportunities-dialog.component';
@@ -6,11 +6,13 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { AskDialogComponent } from '../ask-dialog/ask-dialog.component';
 import { EditCompanyDialogComponent } from '../edit-company-dialog/edit-company-dialog.component';
+import { auto } from '@popperjs/core';
 
 @Component({
   selector: 'app-company-card',
   templateUrl: './company-card.component.html',
-  styleUrls: ['./company-card.component.scss']
+  styleUrls: ['./company-card.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CompanyCardComponent implements OnInit {
 
@@ -54,6 +56,17 @@ export class CompanyCardComponent implements OnInit {
   constructor(public dialog: MatDialog, public authService: AuthenticationService, public router: Router) {}
 
   ngOnInit(): void {
+  } 
+
+  parseSubtitle() {
+    let positions: String[] = [];
+    if (this.company?.opportunities == null) {
+      return "No position available currently"
+    }
+    for (let opportunity of this.company.opportunities!) {
+      positions.push(opportunity.position!);
+    }
+    return (this.company.opportunities?.length == 1) ?positions[0] :positions.join("/")
   }
 
   deleteCompany(companyName: string) {

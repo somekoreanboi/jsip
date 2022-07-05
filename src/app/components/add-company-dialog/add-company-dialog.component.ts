@@ -13,10 +13,10 @@ export class AddCompanyDialogComponent implements OnInit {
 
   addCompanyForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
+    profile: new FormControl('', Validators.required),
     company_link: new FormControl('', Validators.required),
     img: new FormControl('', Validators.required),
-    ourBusiness: new FormControl('', Validators.required),
+    application_headline: new FormControl('', Validators.required),
   },)
 
   constructor(public authService: AuthenticationService, @Inject(MAT_DIALOG_DATA) data: { functionHolder: Function }) {
@@ -31,10 +31,10 @@ export class AddCompanyDialogComponent implements OnInit {
   makeCompany():Company { 
     const company: Company = {
       name: this.name?.value,
-      description: this.description?.value,
+      profile: this.profile?.value,
       company_link: this.company_link?.value,
       img: this.img?.value,
-      ourBusiness: this.ourBusiness?.value, 
+      application_headline: this.application_headline?.value,
     }
     return company;
 
@@ -60,8 +60,8 @@ get name() {
   return this.addCompanyForm.get('name');
 }
 
-get description() {
-  return this.addCompanyForm.get('description');
+get profile() {
+  return this.addCompanyForm.get('profile');
 }
 
 get company_link() {
@@ -72,8 +72,8 @@ get img() {
   return this.addCompanyForm.get('img');
 }
 
-get ourBusiness() {
-  return this.addCompanyForm.get('ourBusiness');
+get application_headline() {
+  return this.addCompanyForm.get('application_headline');
 }
 
 }

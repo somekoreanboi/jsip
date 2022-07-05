@@ -1,35 +1,91 @@
-// mat-card {
-//     margin-left: none;
-// }
-* {
-    line-height: 200%;
+:host {
+    display: flex;
+    height: 100;
+    width: 100%;
+   }
+
+mat-card {
+    border-color: black;
+    border-width: thick;
+    border-radius: 4px;
+    position: relative;
+    padding-top: 20px;
 }
 
-img {
-    height: 100px;
-    width: 70%;
-    display: block;
-    margin: auto;
-    padding-top: 10px;
+mat-card-title {
+    text-align: center;
+    display: inline-block;
 }
+
+mat-card-title p {
+    height:50px;
+    width: auto;
+    font-size: 2vh;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+mat-card-title p img {
+    height:50px;
+    width: auto;
+}
+
+mat-card-subtitle {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    font-family: 'Finlandica', sans-serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+mat-card-content {
+    display: flex;
+    height: 30vh;
+}
+
+.application_headline {
+    font-family: 'Finlandica', sans-serif;
+    text-align: center;
+    padding-bottom: 2vh;
+    margin-bottom: 2vh;
+    font-weight: bold;
+    font-size: 1.5vh;
+
+}
+
+.profile {
+    text-align: center;
+    font-family: 'Finlandica', sans-serif;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    font-size: 1.5vh;
+
+    overflow: hidden;
+   text-overflow: ellipsis;
+
+}
+
 
 img:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
 
-.mat-card-title {
-    font-size: 200%;
-    font-weight: bold;
-    margin-top: 20px;
+img {
+    margin-right: 5px;
 }
 
-.mat-card {
-    display: flex;
-    flex-direction: column;
-}
 
-.mat-card-content {
-    flex-grow: 1;
-    overflow: auto;
+
+
+#check {
+    color: red; 
+    text-decoration: underline; 
+    font-family: 'Baskerville', serif;
+    text-align: center;
+    font-family: 'Finlandica', sans-serif;
 }

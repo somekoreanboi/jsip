@@ -17,7 +17,7 @@ export class OpportunityDetailsComponent implements OnInit {
 
   @Input() opportunity?: Opportunity
   @Input() companyName?: string;
-  @Input() companyDescription?: string;
+  @Input() companyProfile?: string;
   @Input() companyBusiness?: string;
 
 
@@ -31,7 +31,8 @@ export class OpportunityDetailsComponent implements OnInit {
     this.authService.checkAndAddAppliedCompany(this.opportunity?.position!)?.then(
       (value)=> {
         if (value) {
-          this.authService.sendJobApplicationMail(this.companyName, this.companyDescription, this.companyBusiness, this.opportunity);
+          this.authService.sendJobApplicationMail(this.companyName, this.companyProfile
+        , this.companyBusiness, this.opportunity);
           this.authService.sendAppliedMail(this.companyName!, this.opportunity?.position!).then(()=> {
             this.dialog.open(ConfirmationDialogComponent, {
             });

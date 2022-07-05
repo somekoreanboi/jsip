@@ -1,19 +1,20 @@
 <h1 mat-dialog-title>Job opportunities provided by the company</h1>
 <div mat-dialog-content>
-  <!-- My favorite animal is: -->
-  <mat-selection-list #shoes [multiple]="false">
-    <div>
+  <mat-selection-list [multiple]="false">
+    <div class="container">
     <p *ngIf="company.opportunities?.length == 0 || company.opportunities?.length == null">
         Sorry, but this company is currently not offering any opportunities.
     </p>
     <mat-list-item *ngFor="let opportunity of company.opportunities" (click)="openOpportunityDetail(opportunity)">
-      <div class="opportunities">
+      <div fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="10px" >
+      <span fxFlex="50" class="opportunities">
       {{opportunity.position}}
+      </span>
+      <button fxFlex="20" mat-button (click)="openEditDialog(opportunity.position!)" *ngIf="this.authService.isAdmin" color="primary">Edit Opportunity</button>
+      <button fxFlex="20" mat-button (click)="openDeleteAskDialog(company.name!, opportunity.position!)" *ngIf="this.authService.isAdmin" color="warn">Delete Opportunity</button>
     </div>
-      <button mat-raised-button (click)="openEditDialog(opportunity.position!)" *ngIf="this.authService.isAdmin" color="primary">Edit Opportunity</button>
-      <button mat-raised-button (click)="openDeleteAskDialog(company.name!, opportunity.position!)" *ngIf="this.authService.isAdmin" color="warn">Delete Opportunity</button>
     </mat-list-item>
   </div>
   </mat-selection-list>
-  <button mat-raised-button (click)="openAddOpportunityDialog()" *ngIf="this.authService.isAdmin" color="accent">Add Opportunity</button>
+  <button mat-raised-button (click)="openAddOpportunityDialog()" *ngIf="this.authService.isAdmin" color="">Add Opportunity</button>
 </div>

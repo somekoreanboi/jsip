@@ -11,10 +11,18 @@
         </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput placeholder="Description" formControlName="description" name="description">
+        <textarea matInput placeholder="Profile" formControlName="profile" name="profile">
         </textarea>
-        <mat-error *ngIf="description?.errors?.['required']">
-          Company description is required
+        <mat-error *ngIf="profile?.errors?.['required']">
+          Company Profile is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput placeholder="Application Headline" formControlName="application_headline" name="application_headline">
+        </textarea>
+        <mat-error *ngIf="application_headline?.errors?.['required']">
+          Application headline is required
         </mat-error>
       </mat-form-field>
       
@@ -31,15 +39,6 @@
           Company logo URL is required
         </mat-error>
       </mat-form-field>
-
-      <mat-form-field>
-        <textarea matInput placeholder="Business of the company" formControlName="ourBusiness" name="ourBusiness">
-        </textarea>
-        <mat-error *ngIf="ourBusiness?.errors?.['required']">
-          Business of the company is required
-        </mat-error>
-      </mat-form-field>
-
 </form>
 
 
