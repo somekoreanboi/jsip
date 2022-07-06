@@ -33,7 +33,7 @@ export class EditCompanyDialogComponent implements OnInit {
     this.profile?.setValue(this.company.profile);
     this.company_link?.setValue(this.company.company_link);
     this.img?.setValue(this.company.img);
-    this.application_headline?.setValue(this.application_headline);
+    this.application_headline?.setValue(this.company.application_headline);
   }
 
   makeCompany():Company { 
