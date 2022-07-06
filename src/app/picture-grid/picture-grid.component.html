@@ -2,7 +2,7 @@
     <button (click)="openCompanyAddDialog()" color="warn">Add a new company</button>
 </ng-container>
 
-<div id="container" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between stretch" fxFlexFill>
+<div id="container" fxLayout="row wrap" fxLayoutGap="1px grid" fxLayoutAlign="space-between stretch" fxFlexFill>
     <div fxFlex="50" fxFlex.xs="91 " fxFlex.sm="92 " *ngFor="let company of companies ">
         <app-company-card [refreshCompanies]="this.getCompanies.bind(this) " [company]="company "></app-company-card>
     </div>
