@@ -37,3 +37,41 @@
 .welcome {
     font-size: 130%;
 }
+
+@media only screen and (max-width: 600px) {
+    .form-container {
+        display: block;
+        max-width: 90vw;
+        height: fit-content;
+        margin-left: 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 16px;
+    }
+    .form-container mat-form-field {
+        width: 100%;
+        font-size: 100%;
+        padding-bottom: 0;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+    .margin-top {
+        margin-top: 16px;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .sign-up-link {
+        font-size: 100%;
+        margin-left: 1%;
+    }
+    .welcome {
+        font-size: 110%;
+    }
+    button {
+        margin-bottom: 10px;
+    }
+    ;
+}
