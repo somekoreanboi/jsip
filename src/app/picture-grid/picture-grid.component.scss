@@ -3,7 +3,17 @@ button {
 }
 
 #container {
-    width: 30vw;
-    margin: auto;
+    min-width: 70vw !important;
+    width: 70vw !important;
+    margin: auto !important;
     padding: 0;
+}
+
+@media only screen and (max-width: 600px) {
+    #container {
+        min-width: 90vw !important;
+        width: 90vw !important;
+        margin: auto !important;
+        padding: 0;
+    }
 }
