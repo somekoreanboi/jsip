@@ -28,7 +28,7 @@ export class OpportunityDetailsComponent implements OnInit {
 
   
   submitApplication(): void {
-    this.authService.checkAndAddAppliedCompany(this.opportunity?.position!)?.then(
+    this.authService.checkAndAddAppliedCompany(this.companyName!, this.opportunity?.position!)?.then(
       (value)=> {
         if (value) {
           this.authService.sendJobApplicationMail(this.companyName, this.companyProfile
