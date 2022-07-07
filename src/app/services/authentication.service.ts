@@ -250,7 +250,7 @@ return mailRef.ref.get().then(doc=> {
 
 }
 
-  sendAppliedMail(companyName: string, opportunity_id: string) {
+  sendAppliedMail(companyName: string, position: string) {
     var mail = {
     to: this.userData?.email,
     // to: "info@jpsg-link.com",
@@ -277,7 +277,7 @@ return mailRef.ref.get().then(doc=> {
   }
 
   const mailRef: AngularFirestoreDocument<any> = this.afs.doc(
-    `mails/${this.userData?.email}${opportunity_id}`
+    `mails/${this.userData?.email}${position}`
   );
 
   return mailRef.ref.get().then(doc=> {
@@ -516,15 +516,16 @@ return mailRef.ref.get().then(doc=> {
 
   }
 
-  async checkAndAddAppliedCompany(opportunity_id: string) {
+  async checkAndAddAppliedCompany(companyName: string, position: string) {
+    const id = companyName + '_' + position;
     if (this.userData?.applied_opportunities != null) {
-      if (this.userData.applied_opportunities.includes(opportunity_id)) {
+      if (this.userData.applied_opportunities.includes(id)) {
         this.openSnackBar("You already have applied!")
         return false;
       }
     }
 
-    this.userData?.applied_opportunities?.push(opportunity_id);
+    this.userData?.applied_opportunities?.push(id);
 
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${this.userData!.email}`
