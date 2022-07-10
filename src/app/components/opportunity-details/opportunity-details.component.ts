@@ -37,6 +37,8 @@ export class OpportunityDetailsComponent implements OnInit {
             this.dialog.open(ConfirmationDialogComponent, {
             });
           })
+        } else {
+          this.authService.openSnackBar("You have applied already!");
         }
       }
     )
