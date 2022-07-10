@@ -520,7 +520,7 @@ return mailRef.ref.get().then(doc=> {
     const id = companyName + '_' + position;
     if (this.userData?.applied_opportunities != null) {
       if (this.userData.applied_opportunities.includes(id)) {
-        this.openSnackBar("You already have applied!")
+        this.openSnackBar("You already have applied!");
         return false;
       }
     }
