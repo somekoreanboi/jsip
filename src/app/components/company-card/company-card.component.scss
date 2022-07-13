@@ -26,7 +26,7 @@ img {
 
 mat-card-title {
     text-align: center;
-    display: inline-block;
+    display: flex;
 }
 
 mat-card-title p {
@@ -35,6 +35,9 @@ mat-card-title p {
     font-size: 1.4vw;
     white-space: nowrap;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 mat-card-title p img {
